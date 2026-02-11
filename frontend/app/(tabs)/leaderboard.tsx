@@ -7,10 +7,10 @@ import {
   RefreshControl,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { api } from '../utils/api';
-import { LeaderboardEntry } from '../types';
+import { api } from '../../utils/api';
+import { LeaderboardEntry } from '../../types';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
-import { useAuth } from '../contexts/AuthContext';
+import { useAuth } from '../../contexts/AuthContext';
 
 export default function Leaderboard() {
   const { user } = useAuth();

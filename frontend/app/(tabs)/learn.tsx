@@ -10,9 +10,9 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { api } from '../utils/api';
-import { Lesson } from '../types';
-import { Button } from '../components/Button';
+import { api } from '../../utils/api';
+import { Lesson } from '../../types';
+import { Button } from '../../components/Button';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Progress from 'react-native-progress';
 

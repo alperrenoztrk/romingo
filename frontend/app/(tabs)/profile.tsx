@@ -9,11 +9,11 @@ import {
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter } from 'expo-router';
-import { useAuth } from '../contexts/AuthContext';
-import { api } from '../utils/api';
-import { Achievement } from '../types';
-import { FoxMascot } from '../components/FoxMascot';
-import { Button } from '../components/Button';
+import { useAuth } from '../../contexts/AuthContext';
+import { api } from '../../utils/api';
+import { Achievement } from '../../types';
+import { FoxMascot } from '../../components/FoxMascot';
+import { Button } from '../../components/Button';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Profile() {
