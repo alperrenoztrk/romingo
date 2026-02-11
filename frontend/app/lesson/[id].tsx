@@ -133,26 +133,36 @@ export default function LessonDetail() {
   };
 
   const completeLesson = async () => {
-    if (!lesson) return;
+    if (!lesson || !user) return;
 
     const score = Math.round((correctAnswers / lesson.exercises.length) * 100);
+    const lessonXP = 50;
+    const accuracyBonus = score === 100 ? 20 : score >= 80 ? 10 : 0;
+    const totalXP = lessonXP + accuracyBonus;
 
     try {
-      await api.completeLesson(lesson.id, score);
+      const result = await api.completeLesson(lesson.id, score);
+      const oldLevel = user.level;
       await refreshUser();
+      
+      // Check if leveled up
+      const newUser = await api.getProfile();
+      const didLevelUp = newUser.level > oldLevel;
 
-      Alert.alert(
-        '🎉 Ders Tamamlandı!',
-        `Skorun: ${score}%\nDoğru cevap: ${correctAnswers}/${lesson.exercises.length}`,
-        [
-          {
-            text: 'Ana Sayfaya Dön',
-            onPress: () => router.push('/(tabs)/home'),
-          },
-        ]
-      );
+      // Show completion screen
+      setCompletionData({
+        totalQuestions: lesson.exercises.length,
+        correctAnswers,
+        totalXP: result.xp_earned || totalXP,
+        lessonXP,
+        accuracyBonus,
+        didLevelUp,
+        newLevel: didLevelUp ? newUser.level : undefined,
+      });
+      setShowCompletion(true);
     } catch (error) {
       console.error('Failed to complete lesson:', error);
+      Alert.alert('Hata', 'Ders tamamlanamadı');
     }
   };
 
