@@ -15,6 +15,7 @@ export interface User {
   total_lessons_completed?: number;
   current_skill_tree_level?: number;
   friends?: string[];
+  onboarding_completed?: boolean;
   last_login?: string;
   created_at?: string;
 }
