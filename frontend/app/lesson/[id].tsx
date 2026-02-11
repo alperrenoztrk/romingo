@@ -16,13 +16,34 @@ import { Lesson, Exercise } from '../../types';
 import { Button } from '../../components/Button';
 import { FoxMascot } from '../../components/FoxMascot';
 import { LessonCompletionScreen } from '../../components/LessonCompletionScreen';
-import { FloatingXP } from '../../components/FloatingXP';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
-import * as Progress from 'react-native-progress';
 import { useAuth } from '../../contexts/AuthContext';
 
+// Simple custom progress bar component (replaces react-native-progress to avoid SVG/hook issues)
+const ProgressBar = ({ progress }: { progress: number }) => (
+  <View style={progressStyles.container}>
+    <View style={[progressStyles.fill, { width: `${Math.min(progress * 100, 100)}%` }]} />
+  </View>
+);
+
+const progressStyles = StyleSheet.create({
+  container: {
+    height: 8,
+    backgroundColor: '#E5E5E5',
+    borderRadius: 4,
+    overflow: 'hidden',
+    flex: 1,
+  },
+  fill: {
+    height: '100%',
+    backgroundColor: '#58CC02',
+    borderRadius: 4,
+  },
+});
+
 export default function LessonDetail() {
+  // ALL hooks must be called unconditionally at the top
   const { id } = useLocalSearchParams();
   const router = useRouter();
   const { user, refreshUser } = useAuth();
@@ -38,35 +59,37 @@ export default function LessonDetail() {
   const [showVocabulary, setShowVocabulary] = useState(true);
   const [showCompletion, setShowCompletion] = useState(false);
   const [completionData, setCompletionData] = useState<any>(null);
-  const [showFloatingXP, setShowFloatingXP] = useState(false);
-  const [earnedXP, setEarnedXP] = useState(0);
 
+  // Single useEffect for loading lesson (removed duplicate)
   useEffect(() => {
-    loadLesson();
-  }, [id]);
+    const loadLesson = async () => {
+      try {
+        setLoading(true);
+        const data = await api.getLesson(id as string);
+        setLesson(data);
+      } catch (error) {
+        Alert.alert('Hata', 'Ders yüklenemedi');
+        router.back();
+      } finally {
+        setLoading(false);
+      }
+    };
 
-  useEffect(() => {
-    loadLesson();
-  }, [id]);
-
-  const loadLesson = async () => {
-    try {
-      const data = await api.getLesson(id as string);
-      setLesson(data);
-    } catch (error) {
-      Alert.alert('Hata', 'Ders yüklenemedi');
-      router.back();
-    } finally {
-      setLoading(false);
+    if (id) {
+      loadLesson();
     }
-  };
+  }, [id]);
 
   const speakText = (text: string) => {
-    Speech.speak(text, {
-      language: 'ro-RO',
-      pitch: 1.0,
-      rate: 0.85,
-    });
+    try {
+      Speech.speak(text, {
+        language: 'ro-RO',
+        pitch: 1.0,
+        rate: 0.85,
+      });
+    } catch (error) {
+      console.warn('Speech not available:', error);
+    }
   };
 
   const handleSubmitAnswer = async () => {
@@ -75,17 +98,14 @@ export default function LessonDetail() {
     const exercise = lesson.exercises[currentExerciseIndex];
     let answer = '';
 
-    // Prepare answer based on exercise type
     if (exercise.type === 'multiple_choice' || exercise.type === 'sentence_complete') {
       answer = selectedOption || '';
     } else if (exercise.type === 'word_match') {
-      // For word match, check if all pairs are matched
-      const allMatched = Object.keys(matchedPairs).length === exercise.pairs?.length;
+      const allMatched = Object.keys(matchedPairs).length === (exercise.pairs?.length || 0);
       if (!allMatched) {
         Alert.alert('Uyarı', 'Lütfen tüm kelimeleri eşleştirin');
         return;
       }
-      // Check if matches are correct
       const correct = exercise.pairs?.every(pair => 
         matchedPairs[pair.romanian] === pair.turkish
       );
@@ -115,12 +135,8 @@ export default function LessonDetail() {
 
       if (result.correct) {
         setCorrectAnswers(prev => prev + 1);
-        // Show floating XP animation
-        setEarnedXP(result.xp_earned || 10);
-        setShowFloatingXP(true);
       }
 
-      // Auto proceed to next after 2 seconds
       setTimeout(() => {
         if (currentExerciseIndex < lesson.exercises.length - 1) {
           nextExercise();
@@ -155,11 +171,9 @@ export default function LessonDetail() {
       const oldLevel = user.level;
       await refreshUser();
       
-      // Check if leveled up
       const newUser = await api.getProfile();
       const didLevelUp = newUser.level > oldLevel;
 
-      // Show completion screen
       setCompletionData({
         totalQuestions: lesson.exercises.length,
         correctAnswers,
@@ -181,10 +195,8 @@ export default function LessonDetail() {
       setSelectedForMatch({ side, value });
     } else {
       if (selectedForMatch.side === side) {
-        // Same side clicked, deselect
         setSelectedForMatch({ side, value });
       } else {
-        // Different sides, create match
         const leftValue = side === 'left' ? value : selectedForMatch.value;
         const rightValue = side === 'right' ? value : selectedForMatch.value;
         
@@ -236,8 +248,8 @@ export default function LessonDetail() {
             <View style={styles.matchContainer}>
               <View style={styles.matchColumn}>
                 {exercise.pairs?.map((pair, index) => {
-                  const isMatched = matchedPairs[pair.romanian];
-                  const isSelected = selectedForMatch?.value === pair.romanian;
+                  const isMatched = !!matchedPairs[pair.romanian];
+                  const isSelected = selectedForMatch?.value === pair.romanian && selectedForMatch?.side === 'left';
                   return (
                     <TouchableOpacity
                       key={index}
@@ -257,7 +269,7 @@ export default function LessonDetail() {
               <View style={styles.matchColumn}>
                 {exercise.pairs?.map((pair, index) => {
                   const isMatched = Object.values(matchedPairs).includes(pair.turkish);
-                  const isSelected = selectedForMatch?.value === pair.turkish;
+                  const isSelected = selectedForMatch?.value === pair.turkish && selectedForMatch?.side === 'right';
                   return (
                     <TouchableOpacity
                       key={index}
@@ -344,25 +356,45 @@ export default function LessonDetail() {
         );
 
       default:
-        return null;
+        return (
+          <View style={styles.exerciseContainer}>
+            <Text style={styles.question}>{exercise.question || 'Alıştırma'}</Text>
+            <TextInput
+              style={styles.textInput}
+              placeholder="Cevabını yaz..."
+              value={userAnswer}
+              onChangeText={setUserAnswer}
+              autoCapitalize="none"
+              editable={!feedback}
+            />
+          </View>
+        );
     }
   };
 
-  // RENDER CONDITIONALS (hooks'tan sonra)
+  // SINGLE RETURN - all conditional rendering handled here (no early returns)
+  // This is the safest way to avoid "Rendered fewer hooks than expected"
   
-  // 1. Loading state
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
         <ActivityIndicator size="large" color="#1CB0F6" />
+        <Text style={styles.loadingText}>Ders yükleniyor...</Text>
       </View>
     );
   }
 
-  // 2. No lesson data
-  if (!lesson) return null;
+  if (!lesson) {
+    return (
+      <View style={styles.loadingContainer}>
+        <Text style={styles.errorText}>Ders bulunamadı</Text>
+        <TouchableOpacity onPress={() => router.back()} style={styles.backButton}>
+          <Text style={styles.backButtonText}>Geri Dön</Text>
+        </TouchableOpacity>
+      </View>
+    );
+  }
 
-  // 3. Show completion screen
   if (showCompletion && completionData) {
     return (
       <LessonCompletionScreen
@@ -381,7 +413,6 @@ export default function LessonDetail() {
     );
   }
 
-  // 4. Show vocabulary first
   if (showVocabulary) {
     return (
       <SafeAreaView style={styles.container} edges={['top']}>
@@ -414,12 +445,12 @@ export default function LessonDetail() {
             ))}
           </View>
 
-          {lesson.grammar_tip && (
+          {lesson.grammar_tip ? (
             <View style={styles.grammarSection}>
               <Text style={styles.sectionTitle}>💡 Gramer İpucu</Text>
               <Text style={styles.grammarText}>{lesson.grammar_tip}</Text>
             </View>
-          )}
+          ) : null}
 
           <View style={styles.buttonContainer}>
             <Button
@@ -444,15 +475,7 @@ export default function LessonDetail() {
           <MaterialCommunityIcons name="close" size={28} color="#333" />
         </TouchableOpacity>
         <View style={styles.progressContainer}>
-          <Progress.Bar
-            progress={progress}
-            width={null}
-            height={8}
-            color="#58CC02"
-            unfilledColor="#E5E5E5"
-            borderWidth={0}
-            borderRadius={4}
-          />
+          <ProgressBar progress={progress} />
         </View>
         <Text style={styles.exerciseCount}>
           {currentExerciseIndex + 1}/{lesson.exercises.length}
@@ -466,7 +489,7 @@ export default function LessonDetail() {
           </View>
         )}
 
-        {renderExercise(currentExercise)}
+        {currentExercise && renderExercise(currentExercise)}
 
         {feedback && (
           <View style={[styles.feedbackContainer, feedback.correct ? styles.correctFeedback : styles.incorrectFeedback]}>
@@ -498,6 +521,28 @@ const styles = StyleSheet.create({
     flex: 1,
     justifyContent: 'center',
     alignItems: 'center',
+    backgroundColor: '#F7F7F7',
+  },
+  loadingText: {
+    marginTop: 16,
+    fontSize: 16,
+    color: '#666',
+  },
+  errorText: {
+    fontSize: 18,
+    color: '#333',
+    marginBottom: 16,
+  },
+  backButton: {
+    paddingHorizontal: 24,
+    paddingVertical: 12,
+    backgroundColor: '#1CB0F6',
+    borderRadius: 12,
+  },
+  backButtonText: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: '600',
   },
   header: {
     flexDirection: 'row',
