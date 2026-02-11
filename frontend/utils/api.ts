@@ -221,4 +221,57 @@ export const api = {
     if (!response.ok) throw new Error('Failed to remove friend');
     return response.json();
   },
+
+  // Stories
+  getStories: async (): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/stories`, { headers });
+    if (!response.ok) throw new Error('Failed to get stories');
+    return response.json();
+  },
+
+  generateStory: async (level: number): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/stories/generate?level=${level}`, {
+      method: 'POST',
+      headers,
+    });
+    if (!response.ok) throw new Error('Failed to generate story');
+    return response.json();
+  },
+
+  getStory: async (storyId: string): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/stories/${storyId}`, { headers });
+    if (!response.ok) throw new Error('Failed to get story');
+    return response.json();
+  },
+
+  completeStory: async (storyId: string, score: number): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/stories/${storyId}/complete?score=${score}`, {
+      method: 'POST',
+      headers,
+    });
+    if (!response.ok) throw new Error('Failed to complete story');
+    return response.json();
+  },
+
+  // Practice
+  getPracticeMistakes: async (): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/practice/mistakes`, { headers });
+    if (!response.ok) throw new Error('Failed to get practice mistakes');
+    return response.json();
+  },
+
+  createPracticeSession: async (): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/practice/session`, {
+      method: 'POST',
+      headers,
+    });
+    if (!response.ok) throw new Error('Failed to create practice session');
+    return response.json();
+  },
 };
