@@ -795,3 +795,195 @@ async def remove_friend(friend_id: str, current_user: dict = Depends(get_current
     )
     return {"message": "Friend removed"}
 
+
+# Stories endpoints
+@app.get("/api/stories")
+async def get_stories(current_user: dict = Depends(get_current_user)):
+    """Get available stories"""
+    stories = list(stories_collection.find().sort("level", ASCENDING))
+    user_id = str(current_user["_id"])
+    
+    stories_with_progress = []
+    for story in stories:
+        progress = user_progress_collection.find_one({
+            "user_id": user_id,
+            "story_id": str(story["_id"])
+        })
+        
+        story_data = serialize_doc(story)
+        story_data["completed"] = progress.get("completed", False) if progress else False
+        stories_with_progress.append(story_data)
+    
+    return {"stories": stories_with_progress}
+
+@app.post("/api/stories/generate")
+async def generate_story(level: int, current_user: dict = Depends(get_current_user)):
+    """Generate a new story using AI"""
+    chat = LlmChat(
+        api_key=EMERGENT_LLM_KEY,
+        session_id=f"story_gen_{level}",
+        system_message="""Sen Türk kullanıcılara Romence öğreten bir hikaye yazarısın. 
+        İnteraktif hikayeler oluşturuyorsun. Her hikaye:
+        1. Kısa paragraflar halinde (3-5 paragraf)
+        2. Her paragrafta anlama soruları
+        3. Romence kelimeler ve Türkçe karşılıkları
+        Yanıtını JSON formatında ver."""
+    ).with_model("openai", "gpt-5.2")
+    
+    topics = ["Restoran", "Alışveriş", "Havaalanı", "Otel", "Park", "Müze", "Kafe"]
+    topic = topics[level % len(topics)]
+    
+    prompt = f"""Level {level} için "{topic}" konusunda interaktif bir Romence hikaye oluştur.
+    Hikaye şu yapıda olmalı:
+    {{
+        "title": "Hikaye başlığı (Türkçe)",
+        "level": {level},
+        "topic": "{topic}",
+        "parts": [
+            {{
+                "text": "Hikaye metni (Türkçe + Romence kelimeler)",
+                "question": "Anlama sorusu (Türkçe)",
+                "options": ["Seçenek 1", "Seçenek 2", "Seçenek 3"],
+                "correct_answer": 0,
+                "explanation": "Açıklama"
+            }},
+            ...3-4 bölüm
+        ],
+        "vocabulary": [
+            {{"romanian": "kelime", "turkish": "karşılık"}},
+            ...5-8 kelime
+        ]
+    }}
+    
+    Lütfen sadece JSON yanıtı ver."""
+    
+    user_message = UserMessage(text=prompt)
+    response = await chat.send_message(user_message)
+    
+    import json
+    try:
+        clean_response = response.strip()
+        if clean_response.startswith("```json"):
+            clean_response = clean_response[7:]
+        if clean_response.startswith("```"):
+            clean_response = clean_response[3:]
+        if clean_response.endswith("```"):
+            clean_response = clean_response[:-3]
+        clean_response = clean_response.strip()
+        
+        story_data = json.loads(clean_response)
+        story_data["created_at"] = datetime.utcnow().isoformat()
+        
+        result = stories_collection.insert_one(story_data)
+        story_data["id"] = str(result.inserted_id)
+        del story_data["_id"]
+        
+        return {"message": "Story created", "story": story_data}
+    except json.JSONDecodeError as e:
+        raise HTTPException(status_code=500, detail="Failed to generate story")
+
+@app.get("/api/stories/{story_id}")
+async def get_story(story_id: str, current_user: dict = Depends(get_current_user)):
+    """Get specific story"""
+    try:
+        story = stories_collection.find_one({"_id": ObjectId(story_id)})
+    except:
+        raise HTTPException(status_code=400, detail="Invalid story ID")
+    
+    if not story:
+        raise HTTPException(status_code=404, detail="Story not found")
+    
+    return serialize_doc(story)
+
+@app.post("/api/stories/{story_id}/complete")
+async def complete_story(story_id: str, score: int, current_user: dict = Depends(get_current_user)):
+    """Mark story as complete"""
+    user_id = str(current_user["_id"])
+    
+    user_progress_collection.update_one(
+        {"user_id": user_id, "story_id": story_id},
+        {
+            "$set": {
+                "completed": True,
+                "score": score,
+                "completed_at": datetime.utcnow().isoformat()
+            }
+        },
+        upsert=True
+    )
+    
+    # Award XP
+    xp_earned = 30
+    users_collection.update_one(
+        {"_id": current_user["_id"]},
+        {"$inc": {"xp": xp_earned}}
+    )
+    
+    return {"message": "Story completed", "xp_earned": xp_earned}
+
+# Practice endpoints
+@app.get("/api/practice/mistakes")
+async def get_practice_mistakes(current_user: dict = Depends(get_current_user)):
+    """Get questions user got wrong for practice"""
+    user_id = str(current_user["_id"])
+    
+    # Find lessons with low scores or incomplete
+    poor_progress = list(user_progress_collection.find({
+        "user_id": user_id,
+        "$or": [
+            {"score": {"$lt": 80}},
+            {"completed": False}
+        ]
+    }).limit(10))
+    
+    practice_lessons = []
+    for progress in poor_progress:
+        lesson_id = progress.get("lesson_id")
+        try:
+            lesson = lessons_collection.find_one({"_id": ObjectId(lesson_id)})
+            if lesson:
+                practice_lessons.append({
+                    "lesson_id": lesson_id,
+                    "title": lesson.get("title"),
+                    "score": progress.get("score", 0),
+                    "exercises_count": len(lesson.get("exercises", []))
+                })
+        except:
+            continue
+    
+    return {"practice_lessons": practice_lessons}
+
+@app.post("/api/practice/session")
+async def create_practice_session(current_user: dict = Depends(get_current_user)):
+    """Create a practice session with mixed questions"""
+    user_id = str(current_user["_id"])
+    
+    # Get weak areas
+    poor_progress = list(user_progress_collection.find({
+        "user_id": user_id,
+        "score": {"$lt": 80}
+    }).limit(5))
+    
+    all_exercises = []
+    for progress in poor_progress:
+        lesson_id = progress.get("lesson_id")
+        try:
+            lesson = lessons_collection.find_one({"_id": ObjectId(lesson_id)})
+            if lesson:
+                exercises = lesson.get("exercises", [])
+                for ex in exercises[:2]:  # Take 2 exercises per weak lesson
+                    ex["lesson_id"] = lesson_id
+                    ex["lesson_title"] = lesson.get("title")
+                    all_exercises.append(ex)
+        except:
+            continue
+    
+    # Shuffle exercises
+    import random
+    random.shuffle(all_exercises)
+    
+    return {
+        "exercises": all_exercises[:10],  # Max 10 questions
+        "total": len(all_exercises[:10])
+    }
+
