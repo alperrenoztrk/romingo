@@ -173,10 +173,18 @@ export default function Shop() {
           <RefreshControl refreshing={refreshing} onRefresh={onRefresh} />
         }
         ListEmptyComponent={
-          <View style={styles.emptyState}>
-            <MaterialCommunityIcons name="shopping-outline" size={80} color={Colors.textLight} />
-            <Text style={styles.emptyText}>Mağaza yükleniyor...</Text>
-          </View>
+          loading ? (
+            <View>
+              <SkeletonShopCard />
+              <SkeletonShopCard />
+              <SkeletonShopCard />
+            </View>
+          ) : (
+            <View style={styles.emptyState}>
+              <MaterialCommunityIcons name="shopping-outline" size={80} color={Colors.textLight} />
+              <Text style={styles.emptyText}>Mağaza yükleniyor...</Text>
+            </View>
+          )
         }
       />
     </SafeAreaView>
