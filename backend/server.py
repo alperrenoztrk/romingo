@@ -584,8 +584,17 @@ async def check_achievements(current_user: dict = Depends(get_current_user)):
                     "icon": ach_type["icon"],
                     "earned_at": datetime.utcnow().isoformat()
                 }
-                achievements_collection.insert_one(new_ach)
-                new_achievements.append(new_ach)
+                result = achievements_collection.insert_one(new_ach)
+                # Serialize for response
+                new_ach_response = {
+                    "id": str(result.inserted_id),
+                    "user_id": user_id,
+                    "badge_type": ach_type["type"],
+                    "name": ach_type["name"],
+                    "icon": ach_type["icon"],
+                    "earned_at": new_ach["earned_at"]
+                }
+                new_achievements.append(new_ach_response)
     
     return {
         "new_achievements": new_achievements,
