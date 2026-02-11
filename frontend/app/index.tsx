@@ -15,7 +15,12 @@ export default function Index() {
   useEffect(() => {
     if (!loading) {
       if (user) {
-        router.replace('/(tabs)/home');
+        // Check if user needs onboarding
+        if (user.onboarding_completed === false) {
+          router.replace('/onboarding');
+        } else {
+          router.replace('/(tabs)/home');
+        }
       }
     }
   }, [user, loading]);
