@@ -131,6 +131,9 @@ export default function LessonDetail() {
 
       if (result.correct) {
         setCorrectAnswers(prev => prev + 1);
+        // Show floating XP animation
+        setEarnedXP(result.xp_earned || 10);
+        setShowFloatingXP(true);
       }
 
       // Auto proceed to next after 2 seconds
