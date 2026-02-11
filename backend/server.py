@@ -229,7 +229,7 @@ async def register(user_data: UserRegister):
     if existing_user:
         raise HTTPException(status_code=400, detail="Email or username already exists")
     
-    # Create new user
+    # Create new user with Duolingo features
     hashed_pw = hash_password(user_data.password)
     new_user = {
         "username": user_data.username,
@@ -238,12 +238,26 @@ async def register(user_data: UserRegister):
         "xp": 0,
         "level": 1,
         "streak": 0,
+        "gems": 500,  # Starting gems
+        "hearts": 5,  # Starting hearts (max 5)
+        "max_hearts": 5,
+        "last_heart_refill": datetime.utcnow().isoformat(),
+        "daily_goal": 50,  # Daily XP goal
+        "daily_goal_progress": 0,
+        "league": "bronze",  # Starting league
+        "league_rank": 0,
+        "total_lessons_completed": 0,
+        "current_skill_tree_level": 1,
+        "friends": [],
         "last_login": datetime.utcnow().isoformat(),
         "created_at": datetime.utcnow().isoformat()
     }
     
     result = users_collection.insert_one(new_user)
     user_id = str(result.inserted_id)
+    
+    # Initialize shop (first time setup)
+    await initialize_shop()
     
     # Create token
     token = create_access_token({"user_id": user_id})
@@ -257,7 +271,12 @@ async def register(user_data: UserRegister):
             "email": new_user["email"],
             "xp": new_user["xp"],
             "level": new_user["level"],
-            "streak": new_user["streak"]
+            "streak": new_user["streak"],
+            "gems": new_user["gems"],
+            "hearts": new_user["hearts"],
+            "daily_goal": new_user["daily_goal"],
+            "daily_goal_progress": new_user["daily_goal_progress"],
+            "league": new_user["league"]
         }
     }
 
