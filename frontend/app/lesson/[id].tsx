@@ -24,7 +24,7 @@ import { useAuth } from '../../contexts/AuthContext';
 export default function LessonDetail() {
   const { id } = useLocalSearchParams();
   const router = useRouter();
-  const { refreshUser } = useAuth();
+  const { user, refreshUser } = useAuth();
   const [lesson, setLesson] = useState<Lesson | null>(null);
   const [loading, setLoading] = useState(true);
   const [currentExerciseIndex, setCurrentExerciseIndex] = useState(0);
@@ -37,6 +37,26 @@ export default function LessonDetail() {
   const [showVocabulary, setShowVocabulary] = useState(true);
   const [showCompletion, setShowCompletion] = useState(false);
   const [completionData, setCompletionData] = useState<any>(null);
+
+  // Show completion screen if lesson is done
+  if (showCompletion && completionData) {
+    return (
+      <LessonCompletionScreen
+        {...completionData}
+        onContinue={() => {
+          router.push('/(tabs)/home');
+        }}
+        onReview={() => {
+          // Reset to review wrong answers
+          setShowCompletion(false);
+          setShowVocabulary(false);
+          setCurrentExerciseIndex(0);
+          setCorrectAnswers(0);
+          setFeedback(null);
+        }}
+      />
+    );
+  }
 
   useEffect(() => {
     loadLesson();
