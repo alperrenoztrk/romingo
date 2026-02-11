@@ -629,3 +629,169 @@ async def check_achievements(current_user: dict = Depends(get_current_user)):
 if __name__ == "__main__":
     import uvicorn
     uvicorn.run(app, host="0.0.0.0", port=8001)
+
+# Import Duolingo features
+from duolingo_features import (
+    initialize_shop, refill_hearts_if_needed, deduct_heart,
+    update_league_standings, get_league_standings,
+    update_daily_goal_progress, get_skill_tree_lessons,
+    init_collections
+)
+
+# Initialize collections for duolingo features
+init_collections(db)
+
+# Shop endpoints
+@app.get("/api/shop")
+async def get_shop(current_user: dict = Depends(get_current_user)):
+    """Get all shop items"""
+    await initialize_shop()
+    items = list(shop_items_collection.find())
+    return {"items": [serialize_doc(item) for item in items]}
+
+@app.post("/api/shop/purchase/{item_id}")
+async def purchase_item(item_id: str, current_user: dict = Depends(get_current_user)):
+    """Purchase an item from shop"""
+    try:
+        item = shop_items_collection.find_one({"_id": ObjectId(item_id)})
+    except:
+        raise HTTPException(status_code=400, detail="Invalid item ID")
+    
+    if not item:
+        raise HTTPException(status_code=404, detail="Item not found")
+    
+    user_gems = current_user.get("gems", 0)
+    if user_gems < item["price"]:
+        raise HTTPException(status_code=400, detail="Not enough gems")
+    
+    # Deduct gems
+    users_collection.update_one(
+        {"_id": current_user["_id"]},
+        {"$inc": {"gems": -item["price"]}}
+    )
+    
+    # Apply item effect
+    if item["item_type"] == "heart_refill":
+        users_collection.update_one(
+            {"_id": current_user["_id"]},
+            {"$set": {"hearts": current_user.get("max_hearts", 5)}}
+        )
+    elif item["item_type"] == "streak_freeze":
+        user_inventory_collection.insert_one({
+            "user_id": str(current_user["_id"]),
+            "item_type": "streak_freeze",
+            "quantity": 1,
+            "purchased_at": datetime.utcnow().isoformat()
+        })
+    elif item["item_type"] == "xp_boost":
+        user_inventory_collection.insert_one({
+            "user_id": str(current_user["_id"]),
+            "item_type": "xp_boost",
+            "active_until": (datetime.utcnow() + timedelta(minutes=15)).isoformat(),
+            "purchased_at": datetime.utcnow().isoformat()
+        })
+    elif item["item_type"] == "heart_increase":
+        users_collection.update_one(
+            {"_id": current_user["_id"]},
+            {"$inc": {"max_hearts": 1}}
+        )
+    
+    return {"message": "Purchase successful", "gems_remaining": user_gems - item["price"]}
+
+# Hearts endpoint
+@app.post("/api/hearts/refill")
+async def refill_hearts(current_user: dict = Depends(get_current_user)):
+    """Refill hearts (passive refill check)"""
+    new_hearts = await refill_hearts_if_needed(current_user)
+    return {"hearts": new_hearts, "max_hearts": current_user.get("max_hearts", 5)}
+
+# League endpoints
+@app.get("/api/league/standings")
+async def league_standings(current_user: dict = Depends(get_current_user)):
+    """Get current league standings"""
+    standings = await get_league_standings(str(current_user["_id"]))
+    return {
+        "league": current_user.get("league", "bronze"),
+        "standings": standings
+    }
+
+@app.post("/api/league/join")
+async def join_league(current_user: dict = Depends(get_current_user)):
+    """Join this week's league"""
+    await update_league_standings(str(current_user["_id"]))
+    return {"message": "Joined league"}
+
+# Daily goal endpoint
+@app.get("/api/daily-goal")
+async def get_daily_goal(current_user: dict = Depends(get_current_user)):
+    """Get daily goal progress"""
+    return {
+        "goal": current_user.get("daily_goal", 50),
+        "progress": current_user.get("daily_goal_progress", 0),
+        "completed": current_user.get("daily_goal_progress", 0) >= current_user.get("daily_goal", 50)
+    }
+
+# Skill tree endpoint
+@app.get("/api/skill-tree")
+async def get_skill_tree(current_user: dict = Depends(get_current_user)):
+    """Get skill tree (lesson path)"""
+    tree = await get_skill_tree_lessons(current_user)
+    return {"tree": tree}
+
+# Friends endpoints
+@app.get("/api/friends")
+async def get_friends(current_user: dict = Depends(get_current_user)):
+    """Get user's friends list"""
+    friend_ids = current_user.get("friends", [])
+    friends = []
+    for friend_id in friend_ids:
+        friend = users_collection.find_one({"_id": ObjectId(friend_id)})
+        if friend:
+            friends.append({
+                "id": str(friend["_id"]),
+                "username": friend["username"],
+                "xp": friend.get("xp", 0),
+                "streak": friend.get("streak", 0),
+                "level": friend.get("level", 1)
+            })
+    return {"friends": friends}
+
+@app.post("/api/friends/add/{username}")
+async def add_friend(username: str, current_user: dict = Depends(get_current_user)):
+    """Add a friend by username"""
+    friend = users_collection.find_one({"username": username})
+    if not friend:
+        raise HTTPException(status_code=404, detail="User not found")
+    
+    friend_id = str(friend["_id"])
+    if friend_id == str(current_user["_id"]):
+        raise HTTPException(status_code=400, detail="Cannot add yourself")
+    
+    if friend_id in current_user.get("friends", []):
+        raise HTTPException(status_code=400, detail="Already friends")
+    
+    # Add to both users' friend lists
+    users_collection.update_one(
+        {"_id": current_user["_id"]},
+        {"$push": {"friends": friend_id}}
+    )
+    users_collection.update_one(
+        {"_id": friend["_id"]},
+        {"$push": {"friends": str(current_user["_id"])}}
+    )
+    
+    return {"message": f"Added {username} as friend"}
+
+@app.delete("/api/friends/remove/{friend_id}")
+async def remove_friend(friend_id: str, current_user: dict = Depends(get_current_user)):
+    """Remove a friend"""
+    users_collection.update_one(
+        {"_id": current_user["_id"]},
+        {"$pull": {"friends": friend_id}}
+    )
+    users_collection.update_one(
+        {"_id": ObjectId(friend_id)},
+        {"$pull": {"friends": str(current_user["_id"])}}
+    )
+    return {"message": "Friend removed"}
+
