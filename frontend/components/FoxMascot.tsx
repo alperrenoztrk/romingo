@@ -1,6 +1,5 @@
 import React, { useEffect, useRef } from 'react';
 import { View, Text, StyleSheet, Animated } from 'react-native';
-import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '../constants/Colors';
 
 interface FoxMascotProps {
@@ -9,6 +8,26 @@ interface FoxMascotProps {
   showMessage?: string;
   animated?: boolean;
 }
+
+const getExpressionEmoji = (expression: string) => {
+  switch (expression) {
+    case 'happy': return '🦊';
+    case 'excited': return '🎉';
+    case 'thinking': return '🦊';
+    case 'sad': return '😔';
+    default: return '🦊';
+  }
+};
+
+const getBgColor = (expression: string) => {
+  switch (expression) {
+    case 'happy': return '#FFF3E0';
+    case 'excited': return '#FFF8E1';
+    case 'thinking': return '#FFF3E0';
+    case 'sad': return '#F5F5F5';
+    default: return '#FFF3E0';
+  }
+};
 
 export const FoxMascot: React.FC<FoxMascotProps> = ({ 
   expression = 'neutral', 
@@ -46,16 +65,6 @@ export const FoxMascot: React.FC<FoxMascotProps> = ({
     };
   }, [animated]);
 
-  const getFoxColor = () => {
-    switch (expression) {
-      case 'happy': return '#FF6B35';
-      case 'excited': return '#FF9600';
-      case 'thinking': return '#FFA726';
-      case 'sad': return '#999';
-      default: return '#FF6B35';
-    }
-  };
-
   return (
     <View style={styles.container}>
       <Animated.View 
@@ -68,12 +77,8 @@ export const FoxMascot: React.FC<FoxMascotProps> = ({
           }
         ]}
       >
-        <View style={[styles.foxCircle, { width: size, height: size }]}>
-          <MaterialCommunityIcons 
-            name="fox" 
-            size={size * 0.7} 
-            color={getFoxColor()} 
-          />
+        <View style={[styles.foxCircle, { width: size, height: size, backgroundColor: getBgColor(expression) }]}>
+          <Text style={{ fontSize: size * 0.5 }}>{getExpressionEmoji(expression)}</Text>
         </View>
       </Animated.View>
       
