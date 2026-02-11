@@ -9,11 +9,11 @@ import {
   Alert,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
-import { useAuth } from '../contexts/AuthContext';
-import { FoxMascot } from '../components/FoxMascot';
-import { XPBar } from '../components/XPBar';
-import { StreakDisplay } from '../components/StreakDisplay';
-import { api } from '../utils/api';
+import { useAuth } from '../../contexts/AuthContext';
+import { FoxMascot } from '../../components/FoxMascot';
+import { XPBar } from '../../components/XPBar';
+import { StreakDisplay } from '../../components/StreakDisplay';
+import { api } from '../../utils/api';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 
 export default function Home() {
