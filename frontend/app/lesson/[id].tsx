@@ -41,25 +41,9 @@ export default function LessonDetail() {
   const [showFloatingXP, setShowFloatingXP] = useState(false);
   const [earnedXP, setEarnedXP] = useState(0);
 
-  // Show completion screen if lesson is done
-  if (showCompletion && completionData) {
-    return (
-      <LessonCompletionScreen
-        {...completionData}
-        onContinue={() => {
-          router.push('/(tabs)/home');
-        }}
-        onReview={() => {
-          // Reset to review wrong answers
-          setShowCompletion(false);
-          setShowVocabulary(false);
-          setCurrentExerciseIndex(0);
-          setCorrectAnswers(0);
-          setFeedback(null);
-        }}
-      />
-    );
-  }
+  useEffect(() => {
+    loadLesson();
+  }, [id]);
 
   useEffect(() => {
     loadLesson();
