@@ -35,6 +35,8 @@ export default function LessonDetail() {
   const [feedback, setFeedback] = useState<{correct: boolean, message: string} | null>(null);
   const [correctAnswers, setCorrectAnswers] = useState(0);
   const [showVocabulary, setShowVocabulary] = useState(true);
+  const [showCompletion, setShowCompletion] = useState(false);
+  const [completionData, setCompletionData] = useState<any>(null);
 
   useEffect(() => {
     loadLesson();
