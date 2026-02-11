@@ -249,6 +249,7 @@ async def register(user_data: UserRegister):
         "total_lessons_completed": 0,
         "current_skill_tree_level": 1,
         "friends": [],
+        "onboarding_completed": False,  # New users need onboarding
         "last_login": datetime.utcnow().isoformat(),
         "created_at": datetime.utcnow().isoformat()
     }
