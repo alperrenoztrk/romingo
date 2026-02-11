@@ -40,6 +40,12 @@ users_collection = db.users
 lessons_collection = db.lessons
 user_progress_collection = db.user_progress
 achievements_collection = db.achievements
+shop_items_collection = db.shop_items
+user_inventory_collection = db.user_inventory
+friends_collection = db.friends
+leagues_collection = db.leagues
+league_members_collection = db.league_members
+stories_collection = db.stories
 
 # Security
 security = HTTPBearer()
