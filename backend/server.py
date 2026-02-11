@@ -987,3 +987,32 @@ async def create_practice_session(current_user: dict = Depends(get_current_user)
         "total": len(all_exercises[:10])
     }
 
+
+# User preferences endpoint
+@app.post("/api/user/update-preferences")
+async def update_preferences(
+    reason: str = None,
+    daily_goal: int = None,
+    experience_level: str = None,
+    onboarding_completed: bool = None,
+    current_user: dict = Depends(get_current_user)
+):
+    """Update user preferences"""
+    update_data = {}
+    if reason:
+        update_data["learning_reason"] = reason
+    if daily_goal:
+        update_data["daily_goal"] = daily_goal
+    if experience_level:
+        update_data["experience_level"] = experience_level
+    if onboarding_completed is not None:
+        update_data["onboarding_completed"] = onboarding_completed
+    
+    if update_data:
+        users_collection.update_one(
+            {"_id": current_user["_id"]},
+            {"$set": update_data}
+        )
+    
+    return {"message": "Preferences updated", "updated": update_data}
+
