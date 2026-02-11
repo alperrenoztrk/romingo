@@ -1,9 +1,9 @@
 import React, { useEffect } from 'react';
 import { View, Text, StyleSheet, ActivityIndicator } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useAuth } from './contexts/AuthContext';
-import { FoxMascot } from './components/FoxMascot';
-import { Button } from './components/Button';
+import { useAuth } from '../contexts/AuthContext';
+import { FoxMascot } from '../components/FoxMascot';
+import { Button } from '../components/Button';
 import { StatusBar } from 'expo-status-bar';
 
 export default function Index() {
