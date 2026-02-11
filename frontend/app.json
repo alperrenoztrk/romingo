@@ -1,22 +1,32 @@
 {
   "expo": {
-    "name": "frontend",
-    "slug": "frontend",
+    "name": "Romingo",
+    "slug": "romingo",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
-    "scheme": "frontend",
+    "scheme": "romingo",
     "userInterfaceStyle": "automatic",
     "newArchEnabled": true,
+    "description": "Romenceyi eğlenceli şekilde öğren",
     "ios": {
-      "supportsTablet": true
+      "supportsTablet": true,
+      "bundleIdentifier": "com.romingo.app",
+      "infoPlist": {
+        "NSSpeechRecognitionUsageDescription": "Telaffuz pratiği için mikrofon gerekli",
+        "NSMicrophoneUsageDescription": "Sesli alıştırmalar için"
+      }
     },
     "android": {
       "adaptiveIcon": {
         "foregroundImage": "./assets/images/adaptive-icon.png",
-        "backgroundColor": "#000"
+        "backgroundColor": "#FF6B35"
       },
-      "edgeToEdgeEnabled": true
+      "edgeToEdgeEnabled": true,
+      "package": "com.romingo.app",
+      "permissions": [
+        "android.permission.RECORD_AUDIO"
+      ]
     },
     "web": {
       "bundler": "metro",
@@ -31,12 +41,17 @@
           "image": "./assets/images/splash-icon.png",
           "imageWidth": 200,
           "resizeMode": "contain",
-          "backgroundColor": "#000"
+          "backgroundColor": "#FF6B35"
         }
       ]
     ],
     "experiments": {
       "typedRoutes": true
+    },
+    "extra": {
+      "router": {
+        "origin": false
+      }
     }
   }
 }
