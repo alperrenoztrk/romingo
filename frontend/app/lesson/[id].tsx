@@ -16,6 +16,7 @@ import { Lesson, Exercise } from '../../types';
 import { Button } from '../../components/Button';
 import { FoxMascot } from '../../components/FoxMascot';
 import { LessonCompletionScreen } from '../../components/LessonCompletionScreen';
+import { FloatingXP } from '../../components/FloatingXP';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import * as Speech from 'expo-speech';
 import * as Progress from 'react-native-progress';
