@@ -1,0 +1,118 @@
+{
+  "level": 19,
+  "topic": "Țări și Limbi (Ülkeler ve Diller)",
+  "title": "Ülkeler ve Diller: Nerelisin, hangi dili konuşuyorsun?",
+  "description": "Bu derste ülkeler, milliyetler ve konuşulan diller hakkında soru sormayı ve cevaplamayı öğreneceksin. “Din…”, “în…”, “vorbesc…” yapılarıyla kısa diyaloglar kuracağız.",
+  "vocabulary": [
+    {
+      "romanian": "țară",
+      "turkish": "ülke",
+      "pronunciation": "tsuh-rah"
+    },
+    {
+      "romanian": "limbă",
+      "turkish": "dil",
+      "pronunciation": "leem-buh"
+    },
+    {
+      "romanian": "naționalitate",
+      "turkish": "milliyet",
+      "pronunciation": "na-tsee-o-na-lee-TA-te"
+    },
+    {
+      "romanian": "român / română",
+      "turkish": "Romen (erkek) / Romen (kadın)",
+      "pronunciation": "ro-MUHN / ro-MUH-nuh"
+    },
+    {
+      "romanian": "turc / turcă",
+      "turkish": "Türk (erkek) / Türk (kadın)",
+      "pronunciation": "toork / TOOR-kuh"
+    },
+    {
+      "romanian": "american / americană",
+      "turkish": "Amerikalı (erkek) / Amerikalı (kadın)",
+      "pronunciation": "a-me-ree-KAHN / a-me-ree-KAH-nuh"
+    },
+    {
+      "romanian": "a vorbi",
+      "turkish": "konuşmak",
+      "pronunciation": "a vor-BEE"
+    },
+    {
+      "romanian": "engleză",
+      "turkish": "İngilizce",
+      "pronunciation": "en-GLE-zuh"
+    }
+  ],
+  "grammar_tip": "Romencede “Nerelisin?” için en yaygın soru “De unde ești?” (Nereden geliyorsun?) veya “Ești din …?” (…’dan mısın?) şeklindedir. Ülke/şehirden bahsederken sıkça “din” kullanılır: „Sunt din Turcia.” (Türkiye’denim.) Diller için “vorbesc + limbă” yapısı kullanılır: „Vorbesc româna și engleza.” (Romence ve İngilizce konuşuyorum.) Dil isimleri çoğu zaman belirli artikel alarak kullanılır: româna, turca, engleza.",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "“I speak Romanian.” cümlesinin Romencesi hangisi?",
+      "options": [
+        "Sunt România.",
+        "Vorbesc româna.",
+        "Ești român?",
+        "Din româna."
+      ],
+      "correct_answer": "Vorbesc româna.",
+      "explanation": "“Vorbesc” = “konuşuyorum”. Dil adı genellikle “româna” şeklinde belirli artikel ile kullanılır."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "țară",
+          "turkish": "ülke"
+        },
+        {
+          "romanian": "limbă",
+          "turkish": "dil"
+        },
+        {
+          "romanian": "naționalitate",
+          "turkish": "milliyet"
+        },
+        {
+          "romanian": "engleză",
+          "turkish": "İngilizce"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Ben Türkiye’denim.",
+      "correct_answer": "Sunt din Turcia.",
+      "acceptable_answers": [
+        "Eu sunt din Turcia.",
+        "Sunt din Turcia."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Vorbesc __ și româna.",
+      "options": [
+        "engleză",
+        "americană",
+        "țară"
+      ],
+      "correct_answer": "engleză"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Bună! Sunt din România, dar vorbesc și engleza.",
+      "correct_answer": "Bună! Sunt din România, dar vorbesc și engleza."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Sen nerelisin?",
+      "correct_answer": "De unde ești?",
+      "pronunciation_guide": "de OON-de ESH-ti"
+    }
+  ],
+  "created_at": "2026-02-11T18:35:04.389986",
+  "id": "698ccbd808776a31d0ec97d9"
+}

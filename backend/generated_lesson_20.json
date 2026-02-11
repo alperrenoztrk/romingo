@@ -1,0 +1,118 @@
+{
+  "level": 20,
+  "topic": "Recapitulare A1 (A1 Tekrar)",
+  "title": "A1 Tekrar (Recapitulare A1) — Günlük İfadeler ve Temel Yapılar",
+  "description": "Bu ders, A1 seviyesindeki en temel kelimeleri ve cümle kalıplarını tekrar ettirir: selamlaşma, kendini tanıtma, rica/teşekkür, basit sorular ve şimdiki zaman. Kısa alıştırmalarla hızlanacaksın.",
+  "vocabulary": [
+    {
+      "romanian": "Bună!",
+      "turkish": "Merhaba!",
+      "pronunciation": "bu-nı"
+    },
+    {
+      "romanian": "Mulțumesc",
+      "turkish": "Teşekkür ederim",
+      "pronunciation": "mul-tsu-MESK"
+    },
+    {
+      "romanian": "Te rog",
+      "turkish": "Lütfen / Rica ederim",
+      "pronunciation": "te rog"
+    },
+    {
+      "romanian": "Cum te cheamă?",
+      "turkish": "Adın ne?",
+      "pronunciation": "kum te KYA-mı"
+    },
+    {
+      "romanian": "Mă numesc...",
+      "turkish": "Benim adım...",
+      "pronunciation": "mı NU-mesk"
+    },
+    {
+      "romanian": "Unde locuiești?",
+      "turkish": "Nerede yaşıyorsun?",
+      "pronunciation": "UN-de lo-ku-YEŞ-ti"
+    },
+    {
+      "romanian": "Eu sunt...",
+      "turkish": "Ben ...im",
+      "pronunciation": "yeu sunt"
+    },
+    {
+      "romanian": "Acum",
+      "turkish": "Şimdi",
+      "pronunciation": "a-KUM"
+    }
+  ],
+  "grammar_tip": "A1 tekrar ipucu: Romencede kişi zamirleri (eu/tu/el/ea/noi/voi/ei/ele) çoğu zaman fiil çekimiyle zaten anlaşılır, bu yüzden cümlede zamir her zaman şart değildir. \"A fi\" (olmak) fiili şimdiki zaman: eu sunt, tu ești, el/ea este, noi suntem, voi sunteți, ei/ele sunt. Basit soru yapısı için çoğunlukla soru kelimesi + fiil + özne: \"Cum te cheamă?\" (Seni nasıl çağırır?=Adın ne?).",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "\"Mulțumesc\" ne demek?",
+      "options": [
+        "Günaydın",
+        "Teşekkür ederim",
+        "Güle güle",
+        "Özür dilerim"
+      ],
+      "correct_answer": "Teşekkür ederim",
+      "explanation": "\"Mulțumesc\" Romencede \"Teşekkür ederim\" demektir."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "Bună!",
+          "turkish": "Merhaba!"
+        },
+        {
+          "romanian": "Te rog",
+          "turkish": "Lütfen"
+        },
+        {
+          "romanian": "Mă numesc...",
+          "turkish": "Benim adım..."
+        },
+        {
+          "romanian": "Acum",
+          "turkish": "Şimdi"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Adın ne?",
+      "correct_answer": "Cum te cheamă?",
+      "acceptable_answers": [
+        "Cum te cheama?",
+        "Cum te cheamă"
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Eu __ din Turcia.",
+      "options": [
+        "sunt",
+        "este",
+        "ești"
+      ],
+      "correct_answer": "sunt"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Bună! Mă numesc Ana. Tu cum te cheamă?",
+      "correct_answer": "Bună! Mă numesc Ana. Tu cum te cheamă?"
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Benim adım Ahmet.",
+      "correct_answer": "Mă numesc Ahmet.",
+      "pronunciation_guide": "mı NU-mesk A-met"
+    }
+  ],
+  "created_at": "2026-02-11T18:35:22.480025",
+  "id": "698ccbea08776a31d0ec97da"
+}

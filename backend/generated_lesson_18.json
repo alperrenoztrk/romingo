@@ -1,0 +1,113 @@
+{
+  "level": 18,
+  "topic": "Profesii (Meslekler)",
+  "title": "Profesii (Meslekler) – İşini Anlat",
+  "description": "Bu derste Romence meslek adlarını, “Ben …’im / O …” gibi cümlelerle mesleğini söylemeyi ve “a fi” (olmak) fiiliyle temel tanıtım yapmayı öğreneceksin.",
+  "vocabulary": [
+    {
+      "romanian": "medic",
+      "turkish": "doktor",
+      "pronunciation": "ME-dik"
+    },
+    {
+      "romanian": "profesor / profesoară",
+      "turkish": "öğretmen (erkek/kadın)",
+      "pronunciation": "pro-fe-SOR / pro-fe-SOA-rı"
+    },
+    {
+      "romanian": "inginer",
+      "turkish": "mühendis",
+      "pronunciation": "in-ji-NER"
+    },
+    {
+      "romanian": "avocat",
+      "turkish": "avukat",
+      "pronunciation": "a-vo-KAT"
+    },
+    {
+      "romanian": "bucătar / bucătăreasă",
+      "turkish": "aşçı (erkek/kadın)",
+      "pronunciation": "bu-kı-TAR / bu-kı-tı-RYA-sı"
+    },
+    {
+      "romanian": "șofer",
+      "turkish": "şoför",
+      "pronunciation": "ŞO-fer"
+    },
+    {
+      "romanian": "vânzător / vânzătoare",
+      "turkish": "satıcı (erkek/kadın)",
+      "pronunciation": "vın-zı-TOR / vın-zı-TOA-re"
+    }
+  ],
+  "grammar_tip": "Romencede meslek söylerken genelde “a fi” (olmak) kullanılır: „Eu sunt medic.” (Ben doktorum). 3. tekil: „El este…” (O erkek…), „Ea este…” (O kadın…). Meslekler cinsiyete göre değişebilir: profesor/profesoară, bucătar/bucătăreasă, vânzător/vânzătoare. Olumsuz: „Nu sunt…” (… değilim). Soru: „Ești…?” (… misin?)",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "“Ben mühendisim.” cümlesinin Romencesi hangisi?",
+      "options": [
+        "Eu sunt inginer.",
+        "Eu este inginer.",
+        "Eu sunt avocat.",
+        "Tu ești inginer."
+      ],
+      "correct_answer": "Eu sunt inginer.",
+      "explanation": "“Ben” için „Eu sunt …” kullanılır. „Tu ești …” ise “Sen …sin” demektir."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "medic",
+          "turkish": "doktor"
+        },
+        {
+          "romanian": "avocat",
+          "turkish": "avukat"
+        },
+        {
+          "romanian": "șofer",
+          "turkish": "şoför"
+        },
+        {
+          "romanian": "bucătar",
+          "turkish": "aşçı"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: O (kadın) öğretmen.",
+      "correct_answer": "Ea este profesoară.",
+      "acceptable_answers": [
+        "Ea e profesoară.",
+        "Ea este profesoră."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Eu sunt ____. (Ben doktorum.)",
+      "options": [
+        "medic",
+        "șofer",
+        "avocat"
+      ],
+      "correct_answer": "medic"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "El este avocat, iar ea este medic.",
+      "correct_answer": "El este avocat, iar ea este medic."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Ben şoför değilim.",
+      "correct_answer": "Nu sunt șofer.",
+      "pronunciation_guide": "Nu sunt ŞO-fer."
+    }
+  ],
+  "created_at": "2026-02-11T18:34:45.624469",
+  "id": "698ccbc508776a31d0ec97d8"
+}
