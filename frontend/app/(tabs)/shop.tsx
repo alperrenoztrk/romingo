@@ -14,6 +14,7 @@ import { useAuth } from '../../contexts/AuthContext';
 import { api } from '../../utils/api';
 import { UserStatsHeader } from '../../components/UserStatsHeader';
 import { Button } from '../../components/Button';
+import { SkeletonShopCard } from '../../components/SkeletonLoaders';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '../../constants/Colors';
 
