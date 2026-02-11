@@ -1,0 +1,118 @@
+{
+  "level": 16,
+  "topic": "Corpul Uman (İnsan Vücudu)",
+  "title": "Corpul Uman (İnsan Vücudu) - Level 16",
+  "description": "Bu derste insan vücudu ile ilgili temel kelimeleri öğrenecek, ağrı/şikayet bildiren cümleler kuracak ve kısa diyalogları pratik edeceksin.",
+  "vocabulary": [
+    {
+      "romanian": "cap",
+      "turkish": "baş",
+      "pronunciation": "kap"
+    },
+    {
+      "romanian": "ochi",
+      "turkish": "gözler",
+      "pronunciation": "o-ki"
+    },
+    {
+      "romanian": "nas",
+      "turkish": "burun",
+      "pronunciation": "nas"
+    },
+    {
+      "romanian": "gură",
+      "turkish": "ağız",
+      "pronunciation": "gu-rı"
+    },
+    {
+      "romanian": "mână",
+      "turkish": "el",
+      "pronunciation": "mı-nı"
+    },
+    {
+      "romanian": "picior",
+      "turkish": "bacak/ayak",
+      "pronunciation": "pi-çyor"
+    },
+    {
+      "romanian": "stomac",
+      "turkish": "mide",
+      "pronunciation": "sto-mak"
+    },
+    {
+      "romanian": "durere",
+      "turkish": "ağrı",
+      "pronunciation": "du-re-re"
+    }
+  ],
+  "grammar_tip": "Romencede ağrı/şikayet belirtmek için en yaygın kalıp: „Mă doare + [tekil organ]” (…ım ağrıyor) ve „Mă dor + [çoğul organ]” (…larım ağrıyor). Örn: „Mă doare capul.” (Başım ağrıyor) / „Mă dor ochii.” (Gözlerim ağrıyor). Belirli artikeller: capul (baş+ul), stomacul (mide+ul).",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "“Başım ağrıyor.” cümlesinin Romencesi hangisi?",
+      "options": [
+        "Mă doare capul.",
+        "Mă dor capul.",
+        "Mă doare ochii.",
+        "Mă dor stomacul."
+      ],
+      "correct_answer": "Mă doare capul.",
+      "explanation": "„capul” tekil olduğu için „Mă doare …” kullanılır. „Mă dor …” çoğul isimlerle kullanılır (örn. ochii)."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "nas",
+          "turkish": "burun"
+        },
+        {
+          "romanian": "gură",
+          "turkish": "ağız"
+        },
+        {
+          "romanian": "mână",
+          "turkish": "el"
+        },
+        {
+          "romanian": "stomac",
+          "turkish": "mide"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Gözlerim ağrıyor.",
+      "correct_answer": "Mă dor ochii.",
+      "acceptable_answers": [
+        "Ma dor ochii.",
+        "Mă dor ochii"
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Mă doare ___. (Midem ağrıyor.)",
+      "options": [
+        "stomacul",
+        "ochii",
+        "mâna"
+      ],
+      "correct_answer": "stomacul"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Mă doare stomacul și mă dor ochii.",
+      "correct_answer": "Mă doare stomacul și mă dor ochii."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Elim ağrıyor.",
+      "correct_answer": "Mă doare mâna.",
+      "pronunciation_guide": "mı DOA-re MI-nı (â = kısa, kapalı ‘ı’ gibi)"
+    }
+  ],
+  "created_at": "2026-02-11T18:34:10.592902",
+  "id": "698ccba208776a31d0ec97d6"
+}

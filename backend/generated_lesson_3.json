@@ -1,0 +1,118 @@
+{
+  "level": 3,
+  "topic": "Culori și Obiecte (Renkler ve Nesneler)",
+  "title": "Renkler ve Nesneler (Culori și Obiecte)",
+  "description": "Bu derste temel renkleri ve sık kullanılan nesneleri Romence öğrenip, “Bu ne renk?” ve “Bu bir …” gibi cümlelerle pratik yapacaksın.",
+  "vocabulary": [
+    {
+      "romanian": "roșu",
+      "turkish": "kırmızı",
+      "pronunciation": "ro-şu"
+    },
+    {
+      "romanian": "albastru",
+      "turkish": "mavi",
+      "pronunciation": "al-bas-tru"
+    },
+    {
+      "romanian": "verde",
+      "turkish": "yeşil",
+      "pronunciation": "ver-de"
+    },
+    {
+      "romanian": "negru",
+      "turkish": "siyah",
+      "pronunciation": "ne-gru"
+    },
+    {
+      "romanian": "alb",
+      "turkish": "beyaz",
+      "pronunciation": "alb"
+    },
+    {
+      "romanian": "carte",
+      "turkish": "kitap",
+      "pronunciation": "kar-te"
+    },
+    {
+      "romanian": "pix",
+      "turkish": "kalem (tükenmez)",
+      "pronunciation": "piks"
+    },
+    {
+      "romanian": "masă",
+      "turkish": "masa",
+      "pronunciation": "ma-sı (ă)"
+    }
+  ],
+  "grammar_tip": "Romencede “Bu bir …” demek için genelde “Este un/ o …” kullanılır: “Este un pix.” (Bu bir kalem.) “un” erkek/cinsiyetsiz isimlerde, “o” dişi isimlerde kullanılır. Renkler çoğu zaman isimden sonra gelir: “un pix albastru” (mavi bir kalem), “o carte roșie” (kırmızı bir kitap). (Not: Bazı renkler dişil isimle uyum için değişir: roșu → roșie, alb → albă, negru → neagră.)",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "\"mavi bir kalem\" Romence nasıl söylenir?",
+      "options": [
+        "o pix albastru",
+        "un pix albastru",
+        "un pix verde",
+        "o carte albastru"
+      ],
+      "correct_answer": "un pix albastru",
+      "explanation": "\"pix\" erkek isimdir, bu yüzden \"un\" gelir. Renk isimden sonra kullanılır: \"pix albastru\"."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "roșu",
+          "turkish": "kırmızı"
+        },
+        {
+          "romanian": "verde",
+          "turkish": "yeşil"
+        },
+        {
+          "romanian": "carte",
+          "turkish": "kitap"
+        },
+        {
+          "romanian": "masă",
+          "turkish": "masa"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Bu bir yeşil kitap.",
+      "correct_answer": "Este o carte verde.",
+      "acceptable_answers": [
+        "E o carte verde.",
+        "Aceasta este o carte verde."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Este __ masă albă.",
+      "options": [
+        "un",
+        "o",
+        "în"
+      ],
+      "correct_answer": "o"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Este un pix negru.",
+      "correct_answer": "Este un pix negru."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Bu kırmızı bir kitap.",
+      "correct_answer": "Este o carte roșie.",
+      "pronunciation_guide": "Es-te o kar-te ro-şi-e."
+    }
+  ],
+  "created_at": "2026-02-11T18:30:16.243880",
+  "id": "698ccab808776a31d0ec97c9"
+}

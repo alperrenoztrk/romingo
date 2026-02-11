@@ -1,0 +1,118 @@
+{
+  "level": 1,
+  "topic": "Salut și Prezentare (Merhaba ve Tanışma)",
+  "title": "Salut și Prezentare (Merhaba ve Tanışma)",
+  "description": "Bu derste Romence temel selamlaşma ve tanışma cümlelerini öğreneceksin: “Merhaba”, “Benim adım…”, “Senin adın ne?”, “Memnun oldum”.",
+  "vocabulary": [
+    {
+      "romanian": "Salut!",
+      "turkish": "Merhaba! (samimi)",
+      "pronunciation": "sa-LUT"
+    },
+    {
+      "romanian": "Bună!",
+      "turkish": "Merhaba!",
+      "pronunciation": "BU-nă"
+    },
+    {
+      "romanian": "Bună ziua!",
+      "turkish": "İyi günler (resmi)",
+      "pronunciation": "BU-nă ZI-wa"
+    },
+    {
+      "romanian": "Eu sunt…",
+      "turkish": "Ben…im",
+      "pronunciation": "ye-o sunt"
+    },
+    {
+      "romanian": "Mă numesc…",
+      "turkish": "Benim adım…",
+      "pronunciation": "mă nu-MESK"
+    },
+    {
+      "romanian": "Cum te cheamă?",
+      "turkish": "Adın ne? (samimi)",
+      "pronunciation": "Kum te KYA-mă"
+    },
+    {
+      "romanian": "Încântat(ă)!",
+      "turkish": "Memnun oldum!",
+      "pronunciation": "în-kın-TA(t)/(tə)"
+    },
+    {
+      "romanian": "La revedere!",
+      "turkish": "Hoşça kal / Görüşürüz",
+      "pronunciation": "la re-ve-DE-re"
+    }
+  ],
+  "grammar_tip": "Romencede kendini tanıtırken iki yaygın yapı vardır: “Eu sunt + isim” (Ben + isimim) ve “Mă numesc + isim” (Benim adım + isim). “Cum te cheamă?” samimi (sen) hitabıdır; daha resmi kullanım “Cum vă cheamă?” şeklindedir. “Încântat” erkek, “Încântată” kadın konuşur için kullanılır.",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Romencede “İyi günler (resmi)” hangisidir?",
+      "options": [
+        "Salut!",
+        "Bună ziua!",
+        "La revedere!",
+        "Încântat(ă)!"
+      ],
+      "correct_answer": "Bună ziua!",
+      "explanation": "“Bună ziua!” resmi/nezaketli “İyi günler” selamıdır. “Salut!” daha samimidir."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "Salut!",
+          "turkish": "Merhaba! (samimi)"
+        },
+        {
+          "romanian": "Mă numesc…",
+          "turkish": "Benim adım…"
+        },
+        {
+          "romanian": "Cum te cheamă?",
+          "turkish": "Adın ne?"
+        },
+        {
+          "romanian": "La revedere!",
+          "turkish": "Hoşça kal / Görüşürüz"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Benim adım Elif.",
+      "correct_answer": "Mă numesc Elif.",
+      "acceptable_answers": [
+        "Eu sunt Elif.",
+        "Mă numesc Elif"
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: ___ te cheamă?",
+      "options": [
+        "Cum",
+        "Ce",
+        "Unde"
+      ],
+      "correct_answer": "Cum"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Bună! Mă numesc Andrei. Încântat!",
+      "correct_answer": "Bună! Mă numesc Andrei. Încântat!"
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Memnun oldum!",
+      "correct_answer": "Încântat(ă)!",
+      "pronunciation_guide": "în-kın-TA(t)/(tə) — Erkek: “Încântat!”, Kadın: “Încântată!”"
+    }
+  ],
+  "created_at": "2026-02-11T18:29:44.949246",
+  "id": "698cca9808776a31d0ec97c7"
+}

@@ -1,0 +1,118 @@
+{
+  "level": 13,
+  "topic": "Îmbrăcăminte (Giyim)",
+  "title": "Giyim: Kıyafet Alışverişi ve Ne Giydiğini Söyleme",
+  "description": "Bu derste Romence temel giyim kelimelerini öğrenecek, “Üzerimde… var” ve “Giymek” yapılarıyla kıyafet tarif edeceksin. Alışverişte beden ve renk sormaya giriş yapacağız.",
+  "vocabulary": [
+    {
+      "romanian": "îmbrăcăminte",
+      "turkish": "giyim, kıyafet (genel)",
+      "pronunciation": "ım-brı-kı-MİN-te"
+    },
+    {
+      "romanian": "tricou",
+      "turkish": "tişört",
+      "pronunciation": "tri-KOU"
+    },
+    {
+      "romanian": "pantaloni",
+      "turkish": "pantolon",
+      "pronunciation": "pan-ta-LO-ni"
+    },
+    {
+      "romanian": "rochie",
+      "turkish": "elbise",
+      "pronunciation": "RO-ki-ye"
+    },
+    {
+      "romanian": "jachetă",
+      "turkish": "ceket",
+      "pronunciation": "ja-KE-tı"
+    },
+    {
+      "romanian": "pantofi",
+      "turkish": "ayakkabı",
+      "pronunciation": "pan-TO-fi"
+    },
+    {
+      "romanian": "mărime",
+      "turkish": "beden, ölçü",
+      "pronunciation": "mı-Rİ-me"
+    },
+    {
+      "romanian": "a purta",
+      "turkish": "giymek/üzerinde taşımak",
+      "pronunciation": "a PUR-ta"
+    }
+  ],
+  "grammar_tip": "Romencede “giymek/üzerinde olmak” için sık kullanılan iki yapı: (1) “Port + nesne”: „Port o jachetă.” = “Bir ceket giyiyorum.” (2) “A avea pe mine + nesne”: „Am pe mine un tricou.” = “Üzerimde bir tişört var.” Ayrıca belirsiz artikeller: eril „un” (un tricou), dişil „o” (o rochie).",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Romencede “tişört” hangisidir?",
+      "options": [
+        "rochie",
+        "tricou",
+        "pantofi",
+        "mărime"
+      ],
+      "correct_answer": "tricou",
+      "explanation": "„Tricou” = tişört. „Rochie” elbise, „pantofi” ayakkabı, „mărime” beden demektir."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "pantaloni",
+          "turkish": "pantolon"
+        },
+        {
+          "romanian": "jachetă",
+          "turkish": "ceket"
+        },
+        {
+          "romanian": "pantofi",
+          "turkish": "ayakkabı"
+        },
+        {
+          "romanian": "rochie",
+          "turkish": "elbise"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Üzerimde bir ceket var.",
+      "correct_answer": "Am pe mine o jachetă.",
+      "acceptable_answers": [
+        "Am o jachetă pe mine.",
+        "Port o jachetă."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Port __ pantaloni.",
+      "options": [
+        "un",
+        "o",
+        "pe"
+      ],
+      "correct_answer": "ni"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Port un tricou și pantaloni. Am pe mine o jachetă.",
+      "correct_answer": "Port un tricou și pantaloni. Am pe mine o jachetă."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Bugün bir elbise giyiyorum.",
+      "correct_answer": "Astăzi port o rochie.",
+      "pronunciation_guide": "as-TI-zî port o RO-ki-ye"
+    }
+  ],
+  "created_at": "2026-02-11T18:33:17.782392",
+  "id": "698ccb6d08776a31d0ec97d3"
+}

@@ -1,0 +1,118 @@
+{
+  "level": 15,
+  "topic": "Hobby-uri și Timp Liber (Hobiler ve Boş Zaman)",
+  "title": "Hobiler ve Boş Zaman: Plan Yapmak ve Anlatmak (Level 15)",
+  "description": "Bu derste hobiler ve boş zaman aktiviteleriyle ilgili kelimeleri öğrenecek, “hoşlanmak / tercih etmek / genelde” gibi yapılarla cümle kuracak ve kısa planlardan bahsedeceksin.",
+  "vocabulary": [
+    {
+      "romanian": "hobby",
+      "turkish": "hobi",
+      "pronunciation": "HO-bi"
+    },
+    {
+      "romanian": "timp liber",
+      "turkish": "boş zaman",
+      "pronunciation": "timp LEE-ber"
+    },
+    {
+      "romanian": "a se relaxa",
+      "turkish": "rahatlamak",
+      "pronunciation": "a se re-LAK-sa"
+    },
+    {
+      "romanian": "a citi",
+      "turkish": "okumak",
+      "pronunciation": "a çi-TEE"
+    },
+    {
+      "romanian": "a face sport",
+      "turkish": "spor yapmak",
+      "pronunciation": "a FA-çe sport"
+    },
+    {
+      "romanian": "a picta",
+      "turkish": "resim yapmak (boyamak)",
+      "pronunciation": "a PİK-ta"
+    },
+    {
+      "romanian": "a asculta muzică",
+      "turkish": "müzik dinlemek",
+      "pronunciation": "a as-KUL-ta MOO-zi-kı"
+    },
+    {
+      "romanian": "de obicei",
+      "turkish": "genellikle",
+      "pronunciation": "de o-bi-ÇEY"
+    }
+  ],
+  "grammar_tip": "Romencede “hoşlanmak” için en yaygın yapı: „A-mi plăcea + să + fiil” (Beğenirim/hoşuma gider + yapmayı). Örn: „Îmi place să citesc.” = Okumayı severim. Olumsuz: „Nu-mi place să ...”. Ayrıca alışkanlık anlatırken „de obicei” (genellikle) ve zaman ifadeleri (seara/în weekend) sık kullanılır.",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "“Okumayı severim.” cümlesinin Romencesi hangisidir?",
+      "options": [
+        "Îmi place să citesc.",
+        "Îmi place citesc.",
+        "Eu place să citesc.",
+        "Mă place să citesc."
+      ],
+      "correct_answer": "Îmi place să citesc.",
+      "explanation": "Doğru yapı: „Îmi place să + fiil”. „să” bağlacı gereklidir: „Îmi place să citesc.”"
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "timp liber",
+          "turkish": "boş zaman"
+        },
+        {
+          "romanian": "a se relaxa",
+          "turkish": "rahatlamak"
+        },
+        {
+          "romanian": "a face sport",
+          "turkish": "spor yapmak"
+        },
+        {
+          "romanian": "de obicei",
+          "turkish": "genellikle"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Hafta sonu genellikle müzik dinlerim.",
+      "correct_answer": "În weekend, de obicei ascult muzică.",
+      "acceptable_answers": [
+        "De obicei ascult muzică în weekend.",
+        "În weekend ascult de obicei muzică."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Seara, îmi place să __.",
+      "options": [
+        "citesc",
+        "citescăm",
+        "citești"
+      ],
+      "correct_answer": "citesc"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "În timpul liber, îmi place să mă relaxez și să ascult muzică.",
+      "correct_answer": "În timpul liber, îmi place să mă relaxez și să ascult muzică."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Boş zamanımda spor yapmayı severim.",
+      "correct_answer": "În timpul liber, îmi place să fac sport.",
+      "pronunciation_guide": "în TİM-pul LEE-ber, ım PLAS-e sa fak sport"
+    }
+  ],
+  "created_at": "2026-02-11T18:33:52.894112",
+  "id": "698ccb9008776a31d0ec97d5"
+}

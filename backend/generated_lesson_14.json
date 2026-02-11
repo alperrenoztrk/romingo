@@ -1,0 +1,118 @@
+{
+  "level": 14,
+  "topic": "Transportul (Ulaşım)",
+  "title": "Ulaşım (Transportul) – Şehirde Yolculuk",
+  "description": "Bu derste Romence ulaşım araçlarını, bilet ve istasyonla ilgili temel kelimeleri ve “ile/ile gitmek” (cu + araç) yapısını öğreneceksin. Kısa diyaloglar ve alıştırmalarla pratik yapacaksın.",
+  "vocabulary": [
+    {
+      "romanian": "transport",
+      "turkish": "ulaşım / taşıma",
+      "pronunciation": "trans-PORT"
+    },
+    {
+      "romanian": "autobuz",
+      "turkish": "otobüs",
+      "pronunciation": "aw-too-BUZ"
+    },
+    {
+      "romanian": "metrou",
+      "turkish": "metro",
+      "pronunciation": "ME-trow"
+    },
+    {
+      "romanian": "tramvai",
+      "turkish": "tramvay",
+      "pronunciation": "tram-VAI"
+    },
+    {
+      "romanian": "bilet",
+      "turkish": "bilet",
+      "pronunciation": "bee-LET"
+    },
+    {
+      "romanian": "stație",
+      "turkish": "durak / istasyon",
+      "pronunciation": "STA-tsi-ye"
+    },
+    {
+      "romanian": "a schimba (linia)",
+      "turkish": "(hat) değiştirmek / aktarma yapmak",
+      "pronunciation": "a SKIM-ba (LEE-ni-ya)"
+    },
+    {
+      "romanian": "întârziere",
+      "turkish": "gecikme",
+      "pronunciation": "ın-tır-zi-E-re"
+    }
+  ],
+  "grammar_tip": "Romence’de “... ile (araçla) gitmek” için genellikle “cu + ulaşım aracı” kullanılır: „Merg cu autobuzul / cu metroul.” (Otobüsle/metro ile gidiyorum). Ulaşım araçları çoğu zaman belirli artikelle söylenir: autobuz + -ul → „autobuzul”, metrou + -l → „metroul”, tramvai + -ul → „tramvaiul”.",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "“Metro ile gidiyorum.” cümlesinin Romence karşılığı hangisi?",
+      "options": [
+        "Merg cu metroul.",
+        "Merg la metrou.",
+        "Merg pe metroul.",
+        "Merg din metroul."
+      ],
+      "correct_answer": "Merg cu metroul.",
+      "explanation": "Araçla gitmek için standart kullanım „cu + araç”tır: „cu metroul”. „la” yönelme (metroya/metro istasyonuna) hissi verir; „pe/din” burada uygun değildir."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "bilet",
+          "turkish": "bilet"
+        },
+        {
+          "romanian": "stație",
+          "turkish": "durak / istasyon"
+        },
+        {
+          "romanian": "tramvai",
+          "turkish": "tramvay"
+        },
+        {
+          "romanian": "întârziere",
+          "turkish": "gecikme"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Otobüs gecikiyor.",
+      "correct_answer": "Autobuzul întârzie.",
+      "acceptable_answers": [
+        "Autobuzul are întârziere.",
+        "Autobuzul întârzie azi."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Trebuie să __ la stația următoare.",
+      "options": [
+        "schimb",
+        "plătesc",
+        "conduc"
+      ],
+      "correct_answer": "schimb"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Unde este stația de autobuz? Vreau un bilet, vă rog.",
+      "correct_answer": "Unde este stația de autobuz? Vreau un bilet, vă rog."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Bir bilet istiyorum, lütfen.",
+      "correct_answer": "Vreau un bilet, vă rog.",
+      "pronunciation_guide": "VRE-aw un bee-LET, vuh ROG"
+    }
+  ],
+  "created_at": "2026-02-11T18:33:35.985641",
+  "id": "698ccb7f08776a31d0ec97d4"
+}

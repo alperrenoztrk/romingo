@@ -1,0 +1,118 @@
+{
+  "level": 2,
+  "topic": "Numerele 0-20 (Sayılar 0-20)",
+  "title": "Sayılar 0-20 (Numerele 0-20)",
+  "description": "Bu derste Romence 0’dan 20’ye kadar sayıları öğrenecek, yaş ve miktar sormada/pratikte kullanacaksın.",
+  "vocabulary": [
+    {
+      "romanian": "zero",
+      "turkish": "sıfır",
+      "pronunciation": "ZE-ro"
+    },
+    {
+      "romanian": "unu",
+      "turkish": "bir",
+      "pronunciation": "U-nu"
+    },
+    {
+      "romanian": "doi",
+      "turkish": "iki",
+      "pronunciation": "doy"
+    },
+    {
+      "romanian": "trei",
+      "turkish": "üç",
+      "pronunciation": "trey"
+    },
+    {
+      "romanian": "zece",
+      "turkish": "on",
+      "pronunciation": "ZE-che"
+    },
+    {
+      "romanian": "unsprezece",
+      "turkish": "on bir",
+      "pronunciation": "un-spre-ZE-che"
+    },
+    {
+      "romanian": "paisprezece",
+      "turkish": "on dört",
+      "pronunciation": "pai-spre-ZE-che"
+    },
+    {
+      "romanian": "douăzeci",
+      "turkish": "yirmi",
+      "pronunciation": "do-uh-ZE-ch"
+    }
+  ],
+  "grammar_tip": "Romencede 11–19 sayıları genelde “...sprezece” ile biter: 11 unsprezece, 12 doisprezece, 13 treisprezece, 14 paisprezece, 15 cincisprezece, 16 șaisprezece, 17 șaptesprezece, 18 optsprezece, 19 nouăsprezece. 20 ise “douăzeci”dir. Yaş sormak için: „Câți ani ai?” (Kaç yaşındasın?) ve cevap: „Am ... ani.”",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Romence “12” hangisidir?",
+      "options": [
+        "doisprezece",
+        "douăzeci",
+        "doi",
+        "paisprezece"
+      ],
+      "correct_answer": "doisprezece",
+      "explanation": "12 = doisprezece. “douăzeci” 20’dir, “doi” 2’dir, “paisprezece” 14’tür."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "zero",
+          "turkish": "sıfır"
+        },
+        {
+          "romanian": "unu",
+          "turkish": "bir"
+        },
+        {
+          "romanian": "zece",
+          "turkish": "on"
+        },
+        {
+          "romanian": "douăzeci",
+          "turkish": "yirmi"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Ben 15 yaşındayım.",
+      "correct_answer": "Am cincisprezece ani.",
+      "acceptable_answers": [
+        "Eu am cincisprezece ani.",
+        "Am 15 ani."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Am __ ani. (17)",
+      "options": [
+        "șaptesprezece",
+        "șaisprezece",
+        "optsprezece"
+      ],
+      "correct_answer": "șaptesprezece"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Am paisprezece ani.",
+      "correct_answer": "Am paisprezece ani."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Biz 20 elma istiyoruz.",
+      "correct_answer": "Vrem douăzeci de mere.",
+      "pronunciation_guide": "Vrem (vrem) douăzeci (do-uh-ZE-ch) de (de) mere (ME-re)."
+    }
+  ],
+  "created_at": "2026-02-11T18:30:01.099800",
+  "id": "698ccaa908776a31d0ec97c8"
+}

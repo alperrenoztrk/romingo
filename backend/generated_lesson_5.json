@@ -1,0 +1,113 @@
+{
+  "level": 5,
+  "topic": "Activități Zilnice (Günlük Aktiviteler)",
+  "title": "Level 5: Günlük Aktiviteler (Activități Zilnice)",
+  "description": "Bu derste Romence günlük rutinlerini anlatmayı öğreneceksin: uyanmak, hazırlanmak, işe/okula gitmek, yemek yemek ve dinlenmek. Şimdiki zaman (prezent) ve günlük zaman ifadeleriyle pratik yapacağız.",
+  "vocabulary": [
+    {
+      "romanian": "a se trezi",
+      "turkish": "uyanmak",
+      "pronunciation": "a se tre-zi"
+    },
+    {
+      "romanian": "a se spăla pe dinți",
+      "turkish": "diş fırçalamak",
+      "pronunciation": "a se spı-lə pe dints"
+    },
+    {
+      "romanian": "a se îmbrăca",
+      "turkish": "giyinmek",
+      "pronunciation": "a se ım-brə-ka"
+    },
+    {
+      "romanian": "a merge la muncă",
+      "turkish": "işe gitmek",
+      "pronunciation": "a mer-ce la mun-kə"
+    },
+    {
+      "romanian": "a lua micul dejun",
+      "turkish": "kahvaltı yapmak",
+      "pronunciation": "a lu-a mi-kul de-jun"
+    },
+    {
+      "romanian": "a găti",
+      "turkish": "yemek pişirmek",
+      "pronunciation": "a gı-tii"
+    },
+    {
+      "romanian": "a se odihni",
+      "turkish": "dinlenmek",
+      "pronunciation": "a se o-diH-ni"
+    }
+  ],
+  "grammar_tip": "Romence şimdiki zaman (prezent) çekiminde fiilin sonu kişiye göre değişir. Örn: eu merg (ben giderim), tu mergi (sen gidersin), el/ea merge (o gider). Dönüşlü fiillerde (a se trezi, a se îmbrăca) kişi zamirciği fiilden önce gelir: eu mă trezesc, tu te trezești, el se trezește. Günlük rutin anlatırken sık zaman ifadeleri: dimineața (sabahları), seara (akşamları), în fiecare zi (her gün).",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Romence \"Her gün işe giderim\" cümlesi hangisidir?",
+      "options": [
+        "În fiecare zi merg la muncă.",
+        "În fiecare zi merge la muncă.",
+        "În fiecare zi mergi la muncă.",
+        "În fiecare zi mă merg la muncă."
+      ],
+      "correct_answer": "În fiecare zi merg la muncă.",
+      "explanation": "\"Ben\" için fiil: eu merg. \"merge\" (o/3. tekil) ve \"mergi\" (sen/2. tekil) yanlıştır. \"mă merg\" diye bir kullanım yok."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "a se trezi",
+          "turkish": "uyanmak"
+        },
+        {
+          "romanian": "a se îmbrăca",
+          "turkish": "giyinmek"
+        },
+        {
+          "romanian": "a lua micul dejun",
+          "turkish": "kahvaltı yapmak"
+        },
+        {
+          "romanian": "a se odihni",
+          "turkish": "dinlenmek"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Akşamları dinlenirim.",
+      "correct_answer": "Seara mă odihnesc.",
+      "acceptable_answers": [
+        "Seara, mă odihnesc.",
+        "Eu mă odihnesc seara."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Dimineața __ pe dinți.",
+      "options": [
+        "mă spăl",
+        "se spală",
+        "spăl"
+      ],
+      "correct_answer": "mă spăl"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Dimineața mă trezesc la șapte și îmi iau micul dejun.",
+      "correct_answer": "Dimineața mă trezesc la șapte și îmi iau micul dejun."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Her gün kahvaltı yaparım.",
+      "correct_answer": "În fiecare zi iau micul dejun.",
+      "pronunciation_guide": "ın fi-ya-re zi ya-u mi-kul de-jun"
+    }
+  ],
+  "created_at": "2026-02-11T18:30:53.158441",
+  "id": "698ccadd08776a31d0ec97cb"
+}

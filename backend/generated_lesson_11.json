@@ -1,0 +1,118 @@
+{
+  "level": 11,
+  "topic": "Timpul și Ora (Zaman ve Saat)",
+  "title": "Zaman ve Saat: Romence’de Saati Söylemek",
+  "description": "Bu derste Romence’de saat sormayı ve söylemeyi, “kaçta?” yapısını ve yaygın zaman ifadelerini öğreneceksin.",
+  "vocabulary": [
+    {
+      "romanian": "timp",
+      "turkish": "zaman",
+      "pronunciation": "timp"
+    },
+    {
+      "romanian": "oră",
+      "turkish": "saat (zaman birimi)",
+      "pronunciation": "o-ra"
+    },
+    {
+      "romanian": "ceas",
+      "turkish": "saat (kol/duvar saati)",
+      "pronunciation": "çe-as"
+    },
+    {
+      "romanian": "cât e ceasul?",
+      "turkish": "saat kaç?",
+      "pronunciation": "kıt e çe-asul?"
+    },
+    {
+      "romanian": "la (ora)",
+      "turkish": "(saat) ...de / ...-de",
+      "pronunciation": "la (o-ra)"
+    },
+    {
+      "romanian": "și un sfert",
+      "turkish": "çeyrek geçe",
+      "pronunciation": "şi un sfert"
+    },
+    {
+      "romanian": "și jumătate",
+      "turkish": "buçuk",
+      "pronunciation": "şi ju-mı-ta-te"
+    },
+    {
+      "romanian": "fără un sfert",
+      "turkish": "çeyrek kala",
+      "pronunciation": "fı-ra un sfert"
+    }
+  ],
+  "grammar_tip": "Romence’de saat sormak için en yaygın kalıp: “Cât e ceasul?” (Saat kaç?). Saat söylerken genellikle “E ora + sayı” kullanılır: “E ora două.” (Saat iki.) Belirli bir zamanda buluşma/başlama için “la ora + sayı” kullanılır: “Ne vedem la ora trei.” (Saat üçte görüşürüz.) Dakikalar için yaygın kalıplar: “și un sfert” (çeyrek geçe), “și jumătate” (buçuk), “fără un sfert” (çeyrek kala).",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Romence “Saat kaç?” nasıl denir?",
+      "options": [
+        "Unde e ceasul?",
+        "Cât e ceasul?",
+        "Ce e timpul?",
+        "Când e ora?"
+      ],
+      "correct_answer": "Cât e ceasul?",
+      "explanation": "“Cât e ceasul?” doğrudan “Saat kaç?” demektir. “Ceas” burada saat (clock/watch) anlamındadır."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "timp",
+          "turkish": "zaman"
+        },
+        {
+          "romanian": "oră",
+          "turkish": "saat (zaman birimi)"
+        },
+        {
+          "romanian": "ceas",
+          "turkish": "saat (kol/duvar saati)"
+        },
+        {
+          "romanian": "și jumătate",
+          "turkish": "buçuk"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Saat üçte görüşüyoruz.",
+      "correct_answer": "Ne vedem la ora trei.",
+      "acceptable_answers": [
+        "Ne vedem la ora 3.",
+        "Ne vedem la trei."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Ne vedem la ora trei și __.",
+      "options": [
+        "un sfert",
+        "jumătate",
+        "fără"
+      ],
+      "correct_answer": "un sfert"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "E ora șapte și jumătate.",
+      "correct_answer": "E ora șapte și jumătate."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Saat dokuz.",
+      "correct_answer": "E ora nouă.",
+      "pronunciation_guide": "e o-ra no-uh (nouă)"
+    }
+  ],
+  "created_at": "2026-02-11T18:32:39.275089",
+  "id": "698ccb4708776a31d0ec97d1"
+}

@@ -1,0 +1,118 @@
+{
+  "level": 17,
+  "topic": "La Doctor (Doktorda)",
+  "title": "Doktorda (La Doctor)",
+  "description": "Doktorda şikayet belirtme, soru sorma ve temel tıbbi ifadeleri kullanma pratiği.",
+  "vocabulary": [
+    {
+      "romanian": "doctor",
+      "turkish": "doktor",
+      "pronunciation": "dok-tor"
+    },
+    {
+      "romanian": "programare",
+      "turkish": "randevu",
+      "pronunciation": "pro-gra-MA-re"
+    },
+    {
+      "romanian": "durere",
+      "turkish": "ağrı",
+      "pronunciation": "du-RE-re"
+    },
+    {
+      "romanian": "febră",
+      "turkish": "ateş",
+      "pronunciation": "FEH-brı"
+    },
+    {
+      "romanian": "tuse",
+      "turkish": "öksürük",
+      "pronunciation": "TU-se"
+    },
+    {
+      "romanian": "rețetă",
+      "turkish": "reçete",
+      "pronunciation": "re-TSE-tı"
+    },
+    {
+      "romanian": "medicament",
+      "turkish": "ilaç",
+      "pronunciation": "me-di-ka-MENT"
+    },
+    {
+      "romanian": "analize",
+      "turkish": "tahliller",
+      "pronunciation": "a-na-LI-ze"
+    }
+  ],
+  "grammar_tip": "Romencede sahiplik/sıfat+isim yapılarında sık kullanılan kalıp: „mă doare + [vücut bölgesi]” = „...ım ağrıyor”. Örn: „Mă doare capul.” (Başım ağrıyor). Doktora şikayet belirtirken „Am + isim” da yaygındır: „Am febră.” (Ateşim var), „Am tuse.” (Öksürüğüm var). Soru sormak için: „De când...?” (Ne zamandır?), „Unde...?” (Nerede?).",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "“Ateşim var.” cümlesinin Romencesi hangisi?",
+      "options": [
+        "Am febră.",
+        "Sunt febră.",
+        "Am durere.",
+        "Fac febră."
+      ],
+      "correct_answer": "Am febră.",
+      "explanation": "Romencede “X’im var” anlamı için genelde “Am + isim” kullanılır: “Am febră.” = “Ateşim var.”"
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "durere",
+          "turkish": "ağrı"
+        },
+        {
+          "romanian": "rețetă",
+          "turkish": "reçete"
+        },
+        {
+          "romanian": "medicament",
+          "turkish": "ilaç"
+        },
+        {
+          "romanian": "programare",
+          "turkish": "randevu"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Ne zamandır öksürüğün var?",
+      "correct_answer": "De când ai tuse?",
+      "acceptable_answers": [
+        "De când aveți tuse?",
+        "De când ai o tuse?"
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Mă doare __.",
+      "options": [
+        "capul",
+        "rețetă",
+        "doctor"
+      ],
+      "correct_answer": "capul"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Bună ziua, am o programare la doctor. Am febră și tuse.",
+      "correct_answer": "Bună ziua, am o programare la doctor. Am febră și tuse."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Lütfen bana bir reçete yazın.",
+      "correct_answer": "Vă rog să-mi scrieți o rețetă.",
+      "pronunciation_guide": "və rog sə-mi SKRI-eți o re-TSE-tı"
+    }
+  ],
+  "created_at": "2026-02-11T18:34:27.480828",
+  "id": "698ccbb308776a31d0ec97d7"
+}

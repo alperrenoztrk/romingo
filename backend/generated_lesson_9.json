@@ -1,0 +1,113 @@
+{
+  "level": 9,
+  "topic": "Cumpărături (Alışveriş)",
+  "title": "Alışveriş: Fiyat sorma ve satın alma (Level 9)",
+  "description": "Bu derste Romence mağazada fiyat sorma, miktar belirtme, pazarlık/indirim isteme ve ödeme yapma ifadelerini öğreneceksin.",
+  "vocabulary": [
+    {
+      "romanian": "a cumpăra",
+      "turkish": "satın almak",
+      "pronunciation": "a kum-puh-RA"
+    },
+    {
+      "romanian": "cât costă?",
+      "turkish": "ne kadar? (fiyatı kaç?)",
+      "pronunciation": "kıt KOS-tuh"
+    },
+    {
+      "romanian": "preț",
+      "turkish": "fiyat",
+      "pronunciation": "prets"
+    },
+    {
+      "romanian": "reducere",
+      "turkish": "indirim",
+      "pronunciation": "re-du-ÇE-re"
+    },
+    {
+      "romanian": "mărime",
+      "turkish": "beden / numara",
+      "pronunciation": "muh-Rİ-me"
+    },
+    {
+      "romanian": "chitanță",
+      "turkish": "fiş / makbuz",
+      "pronunciation": "ki-TAN-tsuh"
+    },
+    {
+      "romanian": "plătesc cu cardul",
+      "turkish": "kartla öderim",
+      "pronunciation": "pluh-TESK ku KAR-dul"
+    }
+  ],
+  "grammar_tip": "Romencede fiyat sormak için en yaygın kalıp: \"Cât costă...?\" (Ne kadar?) veya \"Cât e...?\" (Kaç para?). Belirli bir ürünü sorarken \"Cât costă + produsul?\" (Bu ürün ne kadar?) yapısını kullanabilirsin. \"cu\" edatı \"ile\" anlamına gelir: \"cu cardul\" (kartla), \"cu numerar\" (nakit).",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "\"Kartla öderim\" ifadesinin Romencesi hangisi?",
+      "options": [
+        "Plătesc cu cardul.",
+        "Cât costă?",
+        "Vreau o chitanță.",
+        "Am o reducere."
+      ],
+      "correct_answer": "Plătesc cu cardul.",
+      "explanation": "\"Plătesc\" = öderim, \"cu\" = ile, \"cardul\" = kart (belirli)."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "preț",
+          "turkish": "fiyat"
+        },
+        {
+          "romanian": "reducere",
+          "turkish": "indirim"
+        },
+        {
+          "romanian": "mărime",
+          "turkish": "beden / numara"
+        },
+        {
+          "romanian": "chitanță",
+          "turkish": "fiş / makbuz"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Bu ceket ne kadar?",
+      "correct_answer": "Cât costă această geacă?",
+      "acceptable_answers": [
+        "Cât costă geaca asta?",
+        "Cât e această geacă?"
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Aș vrea o __, vă rog.",
+      "options": [
+        "chitanță",
+        "mărime",
+        "preț"
+      ],
+      "correct_answer": "chitanță"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Bună ziua! Cât costă această geacă? Aveți mărimea M? Aș vrea și o chitanță, vă rog.",
+      "correct_answer": "Bună ziua! Cât costă această geacă? Aveți mărimea M? Aș vrea și o chitanță, vă rog."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: İndirim var mı?",
+      "correct_answer": "Aveți reducere?",
+      "pronunciation_guide": "a-VEȚ re-du-ÇE-re"
+    }
+  ],
+  "created_at": "2026-02-11T18:32:02.924908",
+  "id": "698ccb2208776a31d0ec97cf"
+}

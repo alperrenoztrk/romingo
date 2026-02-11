@@ -1,0 +1,118 @@
+{
+  "level": 8,
+  "topic": "Numerele 21-100 (Sayılar 21-100)",
+  "title": "Sayılar 21-100 (Numerele 21-100)",
+  "description": "Bu derste Romencede 21-100 arası sayıları kurmayı (özellikle “și” = “ve” yapısı) öğrenecek, örnek cümlelerle pratik yapacaksın.",
+  "vocabulary": [
+    {
+      "romanian": "douăzeci și unu",
+      "turkish": "yirmi bir",
+      "pronunciation": "do-uh-ZEÇ ve OO-noo"
+    },
+    {
+      "romanian": "treizeci",
+      "turkish": "otuz",
+      "pronunciation": "TREY-zeç"
+    },
+    {
+      "romanian": "patruzeci",
+      "turkish": "kırk",
+      "pronunciation": "pa-troo-ZEÇ"
+    },
+    {
+      "romanian": "cincizeci",
+      "turkish": "elli",
+      "pronunciation": "ÇİN-çi-zeç"
+    },
+    {
+      "romanian": "șaizeci",
+      "turkish": "altmış",
+      "pronunciation": "ŞA-yi-zeç"
+    },
+    {
+      "romanian": "șaptezeci",
+      "turkish": "yetmiş",
+      "pronunciation": "şap-te-ZEÇ"
+    },
+    {
+      "romanian": "optzeci",
+      "turkish": "seksen",
+      "pronunciation": "opt-ZEÇ"
+    },
+    {
+      "romanian": "nouăzeci",
+      "turkish": "doksan",
+      "pronunciation": "no-uh-ZEÇ"
+    }
+  ],
+  "grammar_tip": "Romencede 21-99 arası sayılar genellikle “onluk + și + birlik” şeklinde kurulur: 21 = douăzeci și unu, 34 = treizeci și patru. 30, 40, 50… gibi “tam onluklarda” “și” kullanılmaz: treizeci (30), patruzeci (40). 100 = (o) sută.",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Romencede “47” nasıl söylenir?",
+      "options": [
+        "patruzeci și șapte",
+        "patru și zece și șapte",
+        "patruzeci șapte",
+        "șaptezeci și patru"
+      ],
+      "correct_answer": "patruzeci și șapte",
+      "explanation": "47 = 40 (patruzeci) + ve (și) + 7 (șapte)."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "treizeci",
+          "turkish": "otuz"
+        },
+        {
+          "romanian": "cincizeci",
+          "turkish": "elli"
+        },
+        {
+          "romanian": "optzeci",
+          "turkish": "seksen"
+        },
+        {
+          "romanian": "nouăzeci",
+          "turkish": "doksan"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Ben 32 yaşındayım.",
+      "correct_answer": "Am treizeci și doi de ani.",
+      "acceptable_answers": [
+        "Eu am treizeci și doi de ani.",
+        "Am 32 de ani."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Am __ de lei. (78)",
+      "options": [
+        "șaptezeci și opt",
+        "optzeci și șapte",
+        "șaptezeci și nouă"
+      ],
+      "correct_answer": "șaptezeci și opt"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Am patruzeci și cinci de minute.",
+      "correct_answer": "Am patruzeci și cinci de minute."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Oda numarası 96.",
+      "correct_answer": "Numărul camerei este nouăzeci și șase.",
+      "pronunciation_guide": "NOO-mə-rul ka-ME-rey ES-te no-uh-ZEÇ ve ŞA-se"
+    }
+  ],
+  "created_at": "2026-02-11T18:31:45.633268",
+  "id": "698ccb1108776a31d0ec97ce"
+}

@@ -1,0 +1,118 @@
+{
+  "level": 12,
+  "topic": "Casa și Camera (Ev ve Oda)",
+  "title": "Casa și Camera (Ev ve Oda) — Level 12",
+  "description": "Bu derste ev ve odalarla ilgili temel kelimeleri öğrenecek, Romencede belirli/belirsiz artikelleri ve yer bildiren basit cümleleri pratik edeceksin.",
+  "vocabulary": [
+    {
+      "romanian": "casa",
+      "turkish": "ev",
+      "pronunciation": "KA-sa"
+    },
+    {
+      "romanian": "camera",
+      "turkish": "oda",
+      "pronunciation": "KA-me-ra"
+    },
+    {
+      "romanian": "bucătărie",
+      "turkish": "mutfak",
+      "pronunciation": "bu-kı-tı-RI-ye"
+    },
+    {
+      "romanian": "baie",
+      "turkish": "banyo",
+      "pronunciation": "BA-ye"
+    },
+    {
+      "romanian": "dormitor",
+      "turkish": "yatak odası",
+      "pronunciation": "dor-mi-TOR"
+    },
+    {
+      "romanian": "pat",
+      "turkish": "yatak",
+      "pronunciation": "pat"
+    },
+    {
+      "romanian": "masă",
+      "turkish": "masa",
+      "pronunciation": "MA-sı"
+    },
+    {
+      "romanian": "scaun",
+      "turkish": "sandalye",
+      "pronunciation": "ska-un"
+    }
+  ],
+  "grammar_tip": "Romencede artikeller çoğunlukla ismin sonuna eklenir: belirsiz (un/o) = un pat (bir yatak), o masă (bir masa). Belirli artikel (the) = patul (yatak), masa (masa) → masa + a = masaUA (yazım: masa + ua = masaUA). Dişil isimler genelde -ă/-e ile biter. Yer bildirmek için basit yapı: „X este în Y.” (X, Y’dedir).",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "“Yatak odası” Romencede hangisidir?",
+      "options": [
+        "bucătărie",
+        "dormitor",
+        "baie",
+        "camera"
+      ],
+      "correct_answer": "dormitor",
+      "explanation": "“dormitor” = yatak odası. “camera” = oda, “bucătărie” = mutfak, “baie” = banyo."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "casa",
+          "turkish": "ev"
+        },
+        {
+          "romanian": "camera",
+          "turkish": "oda"
+        },
+        {
+          "romanian": "pat",
+          "turkish": "yatak"
+        },
+        {
+          "romanian": "scaun",
+          "turkish": "sandalye"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Sandalye odada.",
+      "correct_answer": "Scaunul este în cameră.",
+      "acceptable_answers": [
+        "Scaunul e în cameră.",
+        "Scaunul este in camera."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Eu sunt în ___.",
+      "options": [
+        "bucătărie",
+        "masă",
+        "pat"
+      ],
+      "correct_answer": "bucătărie"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Patul este în dormitor, iar masa este în bucătărie.",
+      "correct_answer": "Patul este în dormitor, iar masa este în bucătărie."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Ev büyük.",
+      "correct_answer": "Casa este mare.",
+      "pronunciation_guide": "KA-sa ES-te MA-re"
+    }
+  ],
+  "created_at": "2026-02-11T18:32:57.876480",
+  "id": "698ccb5908776a31d0ec97d2"
+}

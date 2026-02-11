@@ -1,0 +1,118 @@
+{
+  "level": 4,
+  "topic": "Familia Mea (Ailem)",
+  "title": "Familia Mea (Ailem) — Level 4",
+  "description": "Bu derste aile üyelerini anlatmayı, “benim/benimki” anlamı veren iyelik yapılarını ve yaş/sahiplik cümlelerini Romence kurmayı öğreneceksin.",
+  "vocabulary": [
+    {
+      "romanian": "familie",
+      "turkish": "aile",
+      "pronunciation": "fa-Mİ-li-e"
+    },
+    {
+      "romanian": "părinți",
+      "turkish": "ebeveynler",
+      "pronunciation": "pı-RİNTS"
+    },
+    {
+      "romanian": "mamă",
+      "turkish": "anne",
+      "pronunciation": "MA-mı"
+    },
+    {
+      "romanian": "tată",
+      "turkish": "baba",
+      "pronunciation": "TA-tı"
+    },
+    {
+      "romanian": "frate",
+      "turkish": "erkek kardeş",
+      "pronunciation": "FRA-te"
+    },
+    {
+      "romanian": "soră",
+      "turkish": "kız kardeş",
+      "pronunciation": "SO-rı"
+    },
+    {
+      "romanian": "soț",
+      "turkish": "koca/eş (erkek)",
+      "pronunciation": "sots"
+    },
+    {
+      "romanian": "soție",
+      "turkish": "karı/eş (kadın)",
+      "pronunciation": "SO-tsi-e"
+    }
+  ],
+  "grammar_tip": "Romencede iyelik (benim/ senin/ onun) çoğu zaman isimden sonra gelen iyelik sıfatıyla kurulur: „mama mea” (annem), „tatăl meu” (babam). Eril tekilde genelde artikelli biçim kullanılır: „tatăl meu”, „fratele meu”; dişilde: „sora mea”, „mama mea”. “A avea” (sahip olmak) fiiliyle: „Eu am o soră.” (Benim bir kız kardeşim var.) Yaş için: „Am 20 de ani.” (20 yaşındayım).",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "“Annem” Romence nasıl söylenir?",
+      "options": [
+        "mama mea",
+        "mama meu",
+        "tatăl meu",
+        "părinții mei"
+      ],
+      "correct_answer": "mama mea",
+      "explanation": "“mamă” dişil isimdir; iyelik “mea” (benim/benimki - dişil tekil) ile kurulur: “mama mea”."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "părinți",
+          "turkish": "ebeveynler"
+        },
+        {
+          "romanian": "frate",
+          "turkish": "erkek kardeş"
+        },
+        {
+          "romanian": "soră",
+          "turkish": "kız kardeş"
+        },
+        {
+          "romanian": "familie",
+          "turkish": "aile"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Benim bir erkek kardeşim var.",
+      "correct_answer": "Eu am un frate.",
+      "acceptable_answers": [
+        "Am un frate.",
+        "Eu am un frate"
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Tatăl __ este medic.",
+      "options": [
+        "meu",
+        "mea",
+        "mei"
+      ],
+      "correct_answer": "meu"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Bună! Aceasta este familia mea: mama mea și tatăl meu. Am o soră.",
+      "correct_answer": "Bună! Aceasta este familia mea: mama mea și tatăl meu. Am o soră."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Ailem büyük.",
+      "correct_answer": "Familia mea este mare.",
+      "pronunciation_guide": "fa-Mİ-li-a ME-a ES-te MA-re"
+    }
+  ],
+  "created_at": "2026-02-11T18:30:33.299906",
+  "id": "698ccac908776a31d0ec97ca"
+}

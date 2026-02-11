@@ -1,0 +1,118 @@
+{
+  "level": 7,
+  "topic": "La Restaurant (Restoranda)",
+  "title": "Restoranda: Sipariş Vermek ve Hesap İstemek",
+  "description": "Bu derste restoranda masa isteme, menü sorma, sipariş verme ve hesap isteme gibi Level 7 için temel ifadeleri öğreneceksin.",
+  "vocabulary": [
+    {
+      "romanian": "meniul",
+      "turkish": "menü",
+      "pronunciation": "menyul"
+    },
+    {
+      "romanian": "nota de plată",
+      "turkish": "hesap (ödeme fişi)",
+      "pronunciation": "nóta de platı"
+    },
+    {
+      "romanian": "a comanda",
+      "turkish": "sipariş vermek",
+      "pronunciation": "a komandá"
+    },
+    {
+      "romanian": "felul principal",
+      "turkish": "ana yemek",
+      "pronunciation": "felul prinçipál"
+    },
+    {
+      "romanian": "desert",
+      "turkish": "tatlı",
+      "pronunciation": "dezért"
+    },
+    {
+      "romanian": "apă plată",
+      "turkish": "düz su (gazsız)",
+      "pronunciation": "apı platı"
+    },
+    {
+      "romanian": "apă minerală",
+      "turkish": "maden suyu (gazlı)",
+      "pronunciation": "apı mineralı"
+    },
+    {
+      "romanian": "O masă pentru doi, vă rog.",
+      "turkish": "İki kişilik bir masa, lütfen.",
+      "pronunciation": "o ması pentrú doy, vı rog"
+    }
+  ],
+  "grammar_tip": "Romencede restoranda nazik istek için sık kullanılan kalıp: „Aș dori ...” (… isterdim). „Vă rog” = lütfen. Ayrıca „pentru” = için (O masă pentru doi = iki kişilik masa).",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Romence „Hesap lütfen.” hangisidir?",
+      "options": [
+        "Meniul, vă rog.",
+        "Nota de plată, vă rog.",
+        "O masă pentru doi, vă rog.",
+        "Apă plată, vă rog."
+      ],
+      "correct_answer": "Nota de plată, vă rog.",
+      "explanation": "„Nota de plată” restoranda hesap/ödeme fişi demektir. „Vă rog” ekleyerek nazik istek yaparsın."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "meniul",
+          "turkish": "menü"
+        },
+        {
+          "romanian": "desert",
+          "turkish": "tatlı"
+        },
+        {
+          "romanian": "apă minerală",
+          "turkish": "maden suyu (gazlı)"
+        },
+        {
+          "romanian": "a comanda",
+          "turkish": "sipariş vermek"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: İki kişilik bir masa, lütfen.",
+      "correct_answer": "O masă pentru doi, vă rog.",
+      "acceptable_answers": [
+        "O masă pentru două persoane, vă rog.",
+        "O masă pentru 2 persoane, vă rog."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Aș dori __ minerală, vă rog.",
+      "options": [
+        "apă",
+        "nota",
+        "meniul"
+      ],
+      "correct_answer": "apă"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Bună seara! Aș dori meniul și o apă plată, vă rog.",
+      "correct_answer": "Bună seara! Aș dori meniul și o apă plată, vă rog."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Ana yemek istiyorum, lütfen.",
+      "correct_answer": "Aș dori felul principal, vă rog.",
+      "pronunciation_guide": "aş do-rí felul prin-çi-pál, vı rog"
+    }
+  ],
+  "created_at": "2026-02-11T18:31:28.188747",
+  "id": "698ccb0008776a31d0ec97cd"
+}

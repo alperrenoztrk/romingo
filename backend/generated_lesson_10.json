@@ -1,0 +1,118 @@
+{
+  "level": 10,
+  "topic": "Vremea (Hava Durumu)",
+  "title": "Vremea (Hava Durumu) — Tahmin Sorma ve Anlatma",
+  "description": "Bu derste Romence hava durumu kelimelerini öğrenecek, “Hava nasıl?” ve “Yarın yağmur yağacak mı?” gibi cümlelerle tahmin sorup cevaplayabileceksin. Level 10: daha doğal ifadeler, gelecek zaman ve “a ploua / a ninge” gibi kişisel olmayan fiiller.",
+  "vocabulary": [
+    {
+      "romanian": "vremea",
+      "turkish": "hava durumu",
+      "pronunciation": "VREH-meh-a"
+    },
+    {
+      "romanian": "prognoza meteo",
+      "turkish": "hava tahmini",
+      "pronunciation": "PROG-no-za MEH-te-o"
+    },
+    {
+      "romanian": "înnorat",
+      "turkish": "bulutlu",
+      "pronunciation": "ı-nno-RAT"
+    },
+    {
+      "romanian": "senin",
+      "turkish": "güneşli/açık",
+      "pronunciation": "seh-NIN"
+    },
+    {
+      "romanian": "vânt",
+      "turkish": "rüzgâr",
+      "pronunciation": "vınt"
+    },
+    {
+      "romanian": "a ploua",
+      "turkish": "yağmur yağmak",
+      "pronunciation": "a PLO-wa"
+    },
+    {
+      "romanian": "a ninge",
+      "turkish": "kar yağmak",
+      "pronunciation": "a NİN-je"
+    },
+    {
+      "romanian": "temperatură",
+      "turkish": "sıcaklık",
+      "pronunciation": "tem-pe-ra-TU-rı"
+    }
+  ],
+  "grammar_tip": "Romencede hava durumu için sıkça kişisel olmayan yapılar kullanılır: „Plouă.” (Yağmur yağıyor), „Ninge.” (Kar yağıyor), „Este cald/rece.” (Sıcak/soğuk). Gelecek için: „O să plouă mâine.” / „Va ploua mâine.” (Yarın yağmur yağacak). Soru: „O să plouă?” (Yağacak mı?).",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Romence “Yarın yağmur yağacak.” hangisidir?",
+      "options": [
+        "Plouă mâine.",
+        "O să plouă mâine.",
+        "Ninge mâine.",
+        "Este vânt mâine."
+      ],
+      "correct_answer": "O să plouă mâine.",
+      "explanation": "„O să + fiil” yakın gelecek için çok yaygın bir yapıdır. „Plouă mâine.” günlük konuşmada duyulabilir ama ders hedefi gelecek yapısını kurmaktır."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "înnorat",
+          "turkish": "bulutlu"
+        },
+        {
+          "romanian": "senin",
+          "turkish": "güneşli/açık"
+        },
+        {
+          "romanian": "vânt",
+          "turkish": "rüzgâr"
+        },
+        {
+          "romanian": "temperatură",
+          "turkish": "sıcaklık"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Hava bugün nasıl?",
+      "correct_answer": "Cum e vremea azi?",
+      "acceptable_answers": [
+        "Cum este vremea azi?",
+        "Cum e vremea astăzi?"
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Mâine __ înnorat și va bate vântul.",
+      "options": [
+        "este",
+        "sunt",
+        "ești"
+      ],
+      "correct_answer": "este"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Mâine va fi senin, dar seara va ploua puțin.",
+      "correct_answer": "Mâine va fi senin, dar seara va ploua puțin."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Bugün rüzgâr var ve hava soğuk.",
+      "correct_answer": "Azi este vânt și este frig.",
+      "pronunciation_guide": "A-zi ES-te vınt shi ES-te frig"
+    }
+  ],
+  "created_at": "2026-02-11T18:32:20.822259",
+  "id": "698ccb3408776a31d0ec97d0"
+}

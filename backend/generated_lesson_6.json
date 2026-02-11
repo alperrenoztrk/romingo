@@ -1,0 +1,118 @@
+{
+  "level": 6,
+  "topic": "Mâncare și Băutură (Yemek ve İçecek)",
+  "title": "Level 6: Yemek ve İçecek (Mâncare și Băutură)",
+  "description": "Restoranda sipariş verme, istek belirtme ve nazikçe rica etme (aș vrea / vă rog) kalıplarıyla yemek-içecek konuşması pratiği.",
+  "vocabulary": [
+    {
+      "romanian": "meniul",
+      "turkish": "menü",
+      "pronunciation": "me-ni-ul"
+    },
+    {
+      "romanian": "felul principal",
+      "turkish": "ana yemek",
+      "pronunciation": "fe-lul prin-ci-pal"
+    },
+    {
+      "romanian": "garnitură",
+      "turkish": "garnitür/yan yemek",
+      "pronunciation": "gar-ni-tu-ră"
+    },
+    {
+      "romanian": "apă plată",
+      "turkish": "durgun su (gazsız su)",
+      "pronunciation": "a-pă pla-tă"
+    },
+    {
+      "romanian": "apă minerală",
+      "turkish": "maden suyu (gazlı su)",
+      "pronunciation": "a-pă mi-ne-ra-lă"
+    },
+    {
+      "romanian": "desert",
+      "turkish": "tatlı",
+      "pronunciation": "de-zert"
+    },
+    {
+      "romanian": "nota de plată",
+      "turkish": "hesap",
+      "pronunciation": "no-ta de pla-tă"
+    },
+    {
+      "romanian": "Aș vrea...",
+      "turkish": "İsterim... / ... almak istiyorum",
+      "pronunciation": "aş vre-a"
+    }
+  ],
+  "grammar_tip": "Romencede nazik istek için en yaygın kalıp “Aș vrea + isim” (… almak isterim). Daha resmi/nazik ekleme: “Vă rog” (lütfen). Örnek: “Aș vrea o apă plată, vă rog.” (Bir gazsız su isterim, lütfen.) Belirsiz artikel: dişil “o” (o apă, o supă), eril/nötr “un” (un desert, un ceai).",
+  "exercises": [
+    {
+      "type": "multiple_choice",
+      "question": "Restoranda “Bir gazsız su isterim, lütfen.” cümlesinin en doğru Romence karşılığı hangisi?",
+      "options": [
+        "Aș vrea o apă plată, vă rog.",
+        "Aș vrea un apă plată, vă rog.",
+        "Vreau apă minerală, mulțumesc.",
+        "Aș avea o apă plată, vă rog."
+      ],
+      "correct_answer": "Aș vrea o apă plată, vă rog.",
+      "explanation": "“apă” dişildir → “o”. Nazik istek için “Aș vrea …, vă rog.” doğru kalıptır."
+    },
+    {
+      "type": "word_match",
+      "question": "Kelimeleri eşleştir",
+      "pairs": [
+        {
+          "romanian": "meniul",
+          "turkish": "menü"
+        },
+        {
+          "romanian": "desert",
+          "turkish": "tatlı"
+        },
+        {
+          "romanian": "apă minerală",
+          "turkish": "maden suyu (gazlı su)"
+        },
+        {
+          "romanian": "nota de plată",
+          "turkish": "hesap"
+        }
+      ]
+    },
+    {
+      "type": "translation",
+      "question": "Çevir: Ana yemek olarak balık istiyorum.",
+      "correct_answer": "Aș vrea pește ca fel principal.",
+      "acceptable_answers": [
+        "Vreau pește ca fel principal.",
+        "Aș vrea felul principal: pește."
+      ]
+    },
+    {
+      "type": "sentence_complete",
+      "question": "Boşluğu doldur: Aș vrea __ desert, vă rog.",
+      "options": [
+        "un",
+        "o",
+        "doi"
+      ],
+      "correct_answer": "un"
+    },
+    {
+      "type": "listening",
+      "question": "Dinle ve yaz (ses metni Romence)",
+      "audio_text": "Bună seara! Aș vrea meniul, vă rog. Și o apă minerală.",
+      "correct_answer": "Bună seara! Aș vrea meniul, vă rog. Și o apă minerală."
+    },
+    {
+      "type": "speaking",
+      "question": "Şu cümleyi Romence söyle: Hesabı alabilir miyim, lütfen?",
+      "correct_answer": "Pot să primesc nota de plată, vă rog?",
+      "pronunciation_guide": "Pot sə pri-mesk no-ta de pla-tə, və rog?"
+    }
+  ],
+  "created_at": "2026-02-11T18:31:10.938125",
+  "id": "698ccaee08776a31d0ec97cc"
+}
