@@ -43,9 +43,18 @@ export default function TabsLayout() {
         }}
       />
       <Tabs.Screen
-        name="leaderboard"
+        name="shop"
         options={{
-          title: 'Sıralama',
+          title: 'Mağaza',
+          tabBarIcon: ({ color, size }) => (
+            <MaterialCommunityIcons name="shopping" size={size} color={color} />
+          ),
+        }}
+      />
+      <Tabs.Screen
+        name="league"
+        options={{
+          title: 'Lig',
           tabBarIcon: ({ color, size }) => (
             <MaterialIcons name="leaderboard" size={size} color={color} />
           ),
