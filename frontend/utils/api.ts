@@ -130,4 +130,95 @@ export const api = {
     if (!response.ok) throw new Error('Failed to check achievements');
     return response.json();
   },
+
+  // Shop
+  getShop: async (): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/shop`, { headers });
+    if (!response.ok) throw new Error('Failed to get shop');
+    return response.json();
+  },
+
+  purchaseItem: async (itemId: string): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/shop/purchase/${itemId}`, {
+      method: 'POST',
+      headers,
+    });
+    if (!response.ok) throw new Error('Failed to purchase item');
+    return response.json();
+  },
+
+  // Hearts
+  refillHearts: async (): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/hearts/refill`, {
+      method: 'POST',
+      headers,
+    });
+    if (!response.ok) throw new Error('Failed to refill hearts');
+    return response.json();
+  },
+
+  // League
+  getLeagueStandings: async (): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/league/standings`, { headers });
+    if (!response.ok) throw new Error('Failed to get league standings');
+    return response.json();
+  },
+
+  joinLeague: async (): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/league/join`, {
+      method: 'POST',
+      headers,
+    });
+    if (!response.ok) throw new Error('Failed to join league');
+    return response.json();
+  },
+
+  // Daily Goal
+  getDailyGoal: async (): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/daily-goal`, { headers });
+    if (!response.ok) throw new Error('Failed to get daily goal');
+    return response.json();
+  },
+
+  // Skill Tree
+  getSkillTree: async (): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/skill-tree`, { headers });
+    if (!response.ok) throw new Error('Failed to get skill tree');
+    return response.json();
+  },
+
+  // Friends
+  getFriends: async (): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/friends`, { headers });
+    if (!response.ok) throw new Error('Failed to get friends');
+    return response.json();
+  },
+
+  addFriend: async (username: string): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/friends/add/${username}`, {
+      method: 'POST',
+      headers,
+    });
+    if (!response.ok) throw new Error('Failed to add friend');
+    return response.json();
+  },
+
+  removeFriend: async (friendId: string): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/friends/remove/${friendId}`, {
+      method: 'DELETE',
+      headers,
+    });
+    if (!response.ok) throw new Error('Failed to remove friend');
+    return response.json();
+  },
 };
