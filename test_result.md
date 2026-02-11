@@ -238,7 +238,45 @@ backend:
           comment: "POST /achievements/check endpoint fails with 520 Internal Server Error due to MongoDB ObjectId JSON serialization issue. Core functionality works but ObjectIds need proper string conversion in serialize_doc function. Minor issue - doesn't affect core learning features"
 
 frontend:
-  # Frontend testing not performed by testing agent as per instructions
+  - task: "Lesson Screen - Exercise Flow"
+    implemented: true
+    working: true
+    file: "app/lesson/[id].tsx"
+    stuck_count: 2
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "user"
+          comment: "User reported 'Rendered fewer hooks than expected' crash on lesson screen"
+        - working: false
+          agent: "main"
+          comment: "Previous agent attempted fix by consolidating returns but error persisted"
+        - working: true
+          agent: "main"
+          comment: "Fixed by: 1) Replaced react-native-progress (SVG dependency) with custom View-based ProgressBar component 2) Removed duplicate useEffect 3) Removed unused FloatingXP import 4) Fixed fox icon (MaterialCommunityIcons 'fox' does not exist) replaced with emoji 5) Added error handling for Speech API. Exercise flow now works: vocab->exercises->transitions all confirmed working."
+  - task: "Fox Mascot Icon Fix"
+    implemented: true
+    working: true
+    file: "components/FoxMascot.tsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Replaced invalid MaterialCommunityIcons 'fox' icon with emoji based rendering. Fox emoji now displays correctly across all screens."
+  - task: "Splash Screen Fox Icon Fix"
+    implemented: true
+    working: true
+    file: "components/AnimatedSplash.tsx"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: true
+          agent: "main"
+          comment: "Replaced invalid 'fox' icon in splash screen with fox emoji"
 
 metadata:
   created_by: "testing_agent"
