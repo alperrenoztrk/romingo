@@ -219,6 +219,8 @@ async def update_daily_goal_progress(user, xp_earned: int):
 # Skill tree / Path system
 async def get_skill_tree_lessons(user):
     """Get lessons organized as skill tree"""
+    from server import user_progress_collection
+    
     all_lessons = list(lessons_collection.find().sort("level", 1))
     user_id = str(user["_id"])
     
