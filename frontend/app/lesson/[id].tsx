@@ -348,6 +348,9 @@ export default function LessonDetail() {
     }
   };
 
+  // RENDER CONDITIONALS (hooks'tan sonra)
+  
+  // 1. Loading state
   if (loading) {
     return (
       <View style={styles.loadingContainer}>
@@ -356,9 +359,29 @@ export default function LessonDetail() {
     );
   }
 
+  // 2. No lesson data
   if (!lesson) return null;
 
-  // Show vocabulary first
+  // 3. Show completion screen
+  if (showCompletion && completionData) {
+    return (
+      <LessonCompletionScreen
+        {...completionData}
+        onContinue={() => {
+          router.push('/(tabs)/home');
+        }}
+        onReview={() => {
+          setShowCompletion(false);
+          setShowVocabulary(false);
+          setCurrentExerciseIndex(0);
+          setCorrectAnswers(0);
+          setFeedback(null);
+        }}
+      />
+    );
+  }
+
+  // 4. Show vocabulary first
   if (showVocabulary) {
     return (
       <SafeAreaView style={styles.container} edges={['top']}>
