@@ -10,9 +10,9 @@ import {
   Alert,
 } from 'react-native';
 import { useRouter } from 'expo-router';
-import { useAuth } from '../contexts/AuthContext';
-import { Button } from '../components/Button';
-import { FoxMascot } from '../components/FoxMascot';
+import { useAuth } from '../../contexts/AuthContext';
+import { Button } from '../../components/Button';
+import { FoxMascot } from '../../components/FoxMascot';
 import { StatusBar } from 'expo-status-bar';
 
 export default function Register() {
