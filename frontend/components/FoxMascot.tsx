@@ -19,8 +19,10 @@ export const FoxMascot: React.FC<FoxMascotProps> = ({
   const bounceAnim = useRef(new Animated.Value(0)).current;
 
   useEffect(() => {
+    let animation: Animated.CompositeAnimation | null = null;
+    
     if (animated) {
-      Animated.loop(
+      animation = Animated.loop(
         Animated.sequence([
           Animated.timing(bounceAnim, {
             toValue: -10,
@@ -33,8 +35,15 @@ export const FoxMascot: React.FC<FoxMascotProps> = ({
             useNativeDriver: true,
           }),
         ])
-      ).start();
+      );
+      animation.start();
     }
+    
+    return () => {
+      if (animation) {
+        animation.stop();
+      }
+    };
   }, [animated]);
 
   const getFoxColor = () => {
