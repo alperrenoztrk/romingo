@@ -38,6 +38,8 @@ export default function LessonDetail() {
   const [showVocabulary, setShowVocabulary] = useState(true);
   const [showCompletion, setShowCompletion] = useState(false);
   const [completionData, setCompletionData] = useState<any>(null);
+  const [showFloatingXP, setShowFloatingXP] = useState(false);
+  const [earnedXP, setEarnedXP] = useState(0);
 
   // Show completion screen if lesson is done
   if (showCompletion && completionData) {
