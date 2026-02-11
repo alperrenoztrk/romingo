@@ -5,6 +5,16 @@ export interface User {
   xp: number;
   level: number;
   streak: number;
+  gems: number;
+  hearts: number;
+  max_hearts: number;
+  daily_goal: number;
+  daily_goal_progress: number;
+  league: string;
+  league_rank?: number;
+  total_lessons_completed?: number;
+  current_skill_tree_level?: number;
+  friends?: string[];
   last_login?: string;
   created_at?: string;
 }
