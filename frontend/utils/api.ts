@@ -274,4 +274,10 @@ export const api = {
     if (!response.ok) throw new Error('Failed to create practice session');
     return response.json();
   },
+  getReviewQueue: async (): Promise<any> => {
+    const headers = await getAuthHeader();
+    const response = await fetch(`${API_URL}/api/practice/review-queue`, { headers });
+    if (!response.ok) throw new Error('Failed to get review queue');
+    return response.json();
+  },
 };
