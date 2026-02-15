@@ -195,7 +195,7 @@ export default function Learn() {
           <View style={styles.emptyState}>
             <MaterialCommunityIcons name="tree" size={80} color={Colors.textLight} />
             <Text style={styles.emptyText}>Henüz ders yok</Text>
-            <Text style={styles.emptySubtext}>İlk dersi oluşturmak için butona bas</Text>
+            <Text style={styles.emptySubtext}>Dersler yakında eklenecek</Text>
           </View>
         ) : (
           <View style={styles.tree}>
