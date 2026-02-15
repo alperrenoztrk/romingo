@@ -1,0 +1,31 @@
+name: Auto Merge PRs
+
+on:
+  pull_request:
+    types: [opened, synchronize, reopened]
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Auto merge PR
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            try {
+              await github.rest.pulls.merge({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: context.payload.pull_request.number,
+                merge_method: 'squash'
+              });
+              console.log(`PR #${context.payload.pull_request.number} merged successfully.`);
+            } catch (error) {
+              console.log(`Failed to merge PR #${context.payload.pull_request.number}: ${error.message}`);
+              core.setFailed(error.message);
+            }
