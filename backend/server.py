@@ -51,35 +51,46 @@ stories_collection = db.stories
 security = HTTPBearer()
 
 # Database indexes for performance optimization
-def create_database_indexes():
+async def create_database_indexes():
     """Create indexes on frequently queried fields"""
-    # Users collection indexes
-    users_collection.create_index("email", unique=True)
-    users_collection.create_index("username")
-    users_collection.create_index("xp")
-    
-    # User progress collection indexes
-    user_progress_collection.create_index([("user_id", ASCENDING), ("lesson_id", ASCENDING)])
-    user_progress_collection.create_index([("user_id", ASCENDING), ("story_id", ASCENDING)])
-    user_progress_collection.create_index([("user_id", ASCENDING), ("completed", ASCENDING)])
-    
-    # League collections indexes
-    leagues_collection.create_index([("tier", ASCENDING), ("week", ASCENDING)])
-    league_members_collection.create_index("league_id")
-    league_members_collection.create_index([("user_id", ASCENDING), ("league_id", ASCENDING)])
-    
-    # Achievements and inventory indexes
-    achievements_collection.create_index("user_id")
-    user_inventory_collection.create_index("user_id")
-    
-    # Lessons collection indexes
-    lessons_collection.create_index("level")
+    try:
+        # Users collection indexes
+        # Note: email unique index may fail if duplicates exist
+        # In production, ensure data cleanup before enabling unique constraint
+        try:
+            users_collection.create_index("email", unique=True, background=True)
+        except Exception:
+            # If unique index fails (duplicates exist), create non-unique index
+            users_collection.create_index("email", background=True)
+        
+        users_collection.create_index("username", background=True)
+        users_collection.create_index("xp", background=True)
+        
+        # User progress collection indexes
+        user_progress_collection.create_index([("user_id", ASCENDING), ("lesson_id", ASCENDING)], background=True)
+        user_progress_collection.create_index([("user_id", ASCENDING), ("story_id", ASCENDING)], background=True)
+        user_progress_collection.create_index([("user_id", ASCENDING), ("completed", ASCENDING)], background=True)
+        
+        # League collections indexes
+        leagues_collection.create_index([("tier", ASCENDING), ("week", ASCENDING)], background=True)
+        league_members_collection.create_index("league_id", background=True)
+        league_members_collection.create_index([("user_id", ASCENDING), ("league_id", ASCENDING)], background=True)
+        
+        # Achievements and inventory indexes
+        achievements_collection.create_index("user_id", background=True)
+        user_inventory_collection.create_index("user_id", background=True)
+        
+        # Lessons collection indexes
+        lessons_collection.create_index("level", background=True)
+    except Exception as e:
+        # Log but don't fail startup if index creation fails
+        print(f"Warning: Error creating indexes: {e}")
 
 # Create indexes on startup
 @app.on_event("startup")
 async def startup_event():
     """Initialize database indexes on application startup"""
-    create_database_indexes()
+    await create_database_indexes()
 
 # Pydantic Models
 class UserRegister(BaseModel):

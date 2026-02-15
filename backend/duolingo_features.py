@@ -274,18 +274,14 @@ async def get_skill_tree_lessons(user):
     
     # Pre-fetch all user progress at once
     lesson_ids = [str(lesson["_id"]) for lesson in all_lessons]
-    progress_docs = user_progress_collection.find({
+    progress_docs = list(user_progress_collection.find({
         "user_id": user_id,
         "lesson_id": {"$in": lesson_ids}
-    })
-    progress_map = {p["lesson_id"]: p for p in progress_docs}
+    }))
     
-    # Pre-compute completion counts per level
-    completed_progress = user_progress_collection.find({
-        "user_id": user_id,
-        "completed": True
-    })
-    completed_lesson_ids = {p["lesson_id"] for p in completed_progress}
+    # Build both progress map and completed lesson IDs from single query result
+    progress_map = {p["lesson_id"]: p for p in progress_docs}
+    completed_lesson_ids = {p["lesson_id"] for p in progress_docs if p.get("completed", False)}
     
     # Group lessons by level and count completions
     lessons_by_level = {}
