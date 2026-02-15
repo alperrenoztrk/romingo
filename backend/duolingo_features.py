@@ -32,43 +32,84 @@ def init_collections(db):
 # Helper function for shop initialization
 async def initialize_shop():
     """Initialize shop with default items"""
-    existing = shop_items_collection.find_one({"item_type": "heart_refill"})
-    if not existing:
-        shop_items = [
-            {
-                "item_type": "heart_refill",
-                "name": "Kalp Doldur",
-                "description": "Tüm kalplerin yenilenir",
-                "price": 350,
-                "icon": "❤️",
-                "category": "consumable"
-            },
-            {
-                "item_type": "streak_freeze",
-                "name": "Seri Dondurucu",
-                "description": "Bir gün ders yapmasanız bile seriniz korunur",
-                "price": 200,
-                "icon": "🧊",
-                "category": "power_up"
-            },
-            {
-                "item_type": "xp_boost",
-                "name": "XP Arttırıcı",
-                "description": "15 dakika boyunca 2x XP kazanın",
-                "price": 100,
-                "icon": "⚡",
-                "category": "power_up"
-            },
-            {
-                "item_type": "heart_increase",
-                "name": "Ekstra Kalp Slotu",
-                "description": "Maksimum kalp sayısını 1 arttırır",
-                "price": 500,
-                "icon": "💗",
-                "category": "permanent"
-            },
-        ]
-        shop_items_collection.insert_many(shop_items)
+    shop_items = [
+        {
+            "item_type": "heart_refill",
+            "name": "Kalp Doldur",
+            "description": "Tüm kalplerin yenilenir",
+            "price": 350,
+            "icon": "❤️",
+            "category": "consumable"
+        },
+        {
+            "item_type": "streak_freeze",
+            "name": "Seri Dondurucu",
+            "description": "Bir gün ders yapmasanız bile seriniz korunur",
+            "price": 200,
+            "icon": "🧊",
+            "category": "power_up"
+        },
+        {
+            "item_type": "xp_boost",
+            "name": "XP Arttırıcı",
+            "description": "15 dakika boyunca 2x XP kazanın",
+            "price": 100,
+            "icon": "⚡",
+            "category": "power_up"
+        },
+        {
+            "item_type": "heart_increase",
+            "name": "Ekstra Kalp Slotu",
+            "description": "Maksimum kalp sayısını 1 arttırır",
+            "price": 500,
+            "icon": "💗",
+            "category": "permanent"
+        },
+        {
+            "item_type": "timer_boost",
+            "name": "Zamanlayıcı Artırıcı",
+            "description": "Zamanlı alıştırmalarda ekstra süre kazanın",
+            "price": 150,
+            "icon": "⏱️",
+            "category": "power_up"
+        },
+        {
+            "item_type": "hint_token",
+            "name": "İpucu Jetonu",
+            "description": "Alıştırmalarda ipucu almak için kullanın",
+            "price": 75,
+            "icon": "💡",
+            "category": "consumable"
+        },
+        {
+            "item_type": "mistake_shield",
+            "name": "Hata Kalkanı",
+            "description": "Bir yanlış cevap verdiğinizde kalp kaybetmezsiniz",
+            "price": 300,
+            "icon": "🛡️",
+            "category": "power_up"
+        },
+        {
+            "item_type": "level_skip",
+            "name": "Seviye Atlama",
+            "description": "Bir dersi atlayarak bir sonraki derse geçin",
+            "price": 450,
+            "icon": "🚀",
+            "category": "consumable"
+        },
+        {
+            "item_type": "bonus_lesson",
+            "name": "Bonus Ders",
+            "description": "Ekstra bir bonus ders açarak daha fazla XP kazanın",
+            "price": 200,
+            "icon": "📚",
+            "category": "consumable"
+        },
+    ]
+    for item in shop_items:
+        existing = shop_items_collection.find_one({"item_type": item["item_type"]})
+        if not existing:
+            shop_items_collection.insert_one(item)
 
 # Hearts system
 async def refill_hearts_if_needed(user):

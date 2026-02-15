@@ -95,6 +95,11 @@ export default function Shop() {
       '🧊': 'snowflake',
       '⚡': 'lightning-bolt',
       '💗': 'heart-plus',
+      '⏱️': 'timer-outline',
+      '💡': 'lightbulb-on-outline',
+      '🛡️': 'shield-check',
+      '🚀': 'rocket-launch',
+      '📚': 'book-open-variant',
     };
     return iconMap[icon] || 'shopping';
   };
