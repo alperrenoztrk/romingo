@@ -11,11 +11,11 @@ interface FoxMascotProps {
 
 const getExpressionEmoji = (expression: string) => {
   switch (expression) {
-    case 'happy': return '🦊';
+    case 'happy': return '🦩';
     case 'excited': return '🎉';
-    case 'thinking': return '🦊';
+    case 'thinking': return '🦩';
     case 'sad': return '😔';
-    default: return '🦊';
+    default: return '🦩';
   }
 };
 
