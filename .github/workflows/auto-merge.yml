@@ -1,0 +1,96 @@
+name: Auto Merge
+
+on:
+  pull_request_review:
+    types: [submitted]
+  check_suite:
+    types: [completed]
+  status: {}
+
+permissions:
+  contents: write
+  pull-requests: write
+
+jobs:
+  auto-merge:
+    runs-on: ubuntu-latest
+    if: github.event.pull_request != null || github.event.check_suite != null || github.event_name == 'status'
+    steps:
+      - name: Auto-merge approved pull requests
+        uses: actions/github-script@v7
+        with:
+          github-token: ${{ secrets.GITHUB_TOKEN }}
+          script: |
+            let pulls = [];
+
+            if (context.eventName === 'pull_request_review') {
+              pulls = [context.payload.pull_request];
+            } else {
+              const { data: openPulls } = await github.rest.pulls.list({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                state: 'open',
+              });
+              pulls = openPulls;
+            }
+
+            for (const pr of pulls) {
+              const { data: reviews } = await github.rest.pulls.listReviews({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                pull_number: pr.number,
+              });
+
+              // Use the latest review state from each unique reviewer
+              const latestByReviewer = new Map();
+              for (const r of reviews) {
+                if (r.user && (r.state === 'APPROVED' || r.state === 'CHANGES_REQUESTED')) {
+                  latestByReviewer.set(r.user.id, r.state);
+                }
+              }
+
+              const hasApproval = [...latestByReviewer.values()].some(s => s === 'APPROVED');
+              const hasChangesRequested = [...latestByReviewer.values()].some(s => s === 'CHANGES_REQUESTED');
+
+              if (!hasApproval || hasChangesRequested) {
+                core.info(`PR #${pr.number} is not approved or has changes requested, skipping.`);
+                continue;
+              }
+
+              // Check the Checks API
+              const { data: checks } = await github.rest.checks.listForRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: pr.head.sha,
+              });
+
+              const checksPassed = checks.check_runs.every(
+                run => run.conclusion === 'success' || run.conclusion === 'skipped'
+              );
+
+              // Check the Status API for legacy CI systems
+              const { data: combinedStatus } = await github.rest.repos.getCombinedStatusForRef({
+                owner: context.repo.owner,
+                repo: context.repo.repo,
+                ref: pr.head.sha,
+              });
+
+              const statusPassed = combinedStatus.state === 'success' || combinedStatus.statuses.length === 0;
+
+              if (!checksPassed || !statusPassed) {
+                core.info(`PR #${pr.number} has pending or failed checks, skipping.`);
+                continue;
+              }
+
+              try {
+                await github.rest.pulls.merge({
+                  owner: context.repo.owner,
+                  repo: context.repo.repo,
+                  pull_number: pr.number,
+                  merge_method: 'squash',
+                });
+                core.info(`Successfully merged PR #${pr.number}`);
+              } catch (error) {
+                core.warning(`Failed to merge PR #${pr.number}: ${error.message}`);
+              }
+            }
