@@ -93,7 +93,7 @@ export const AnimatedSplash: React.FC<AnimatedSplashProps> = ({ onFinish }) => {
               colors={['#FF6B35', '#FF8C42']}
               style={styles.foxGradient}
             >
-              <Text style={{ fontSize: 80 }}>🦊</Text>
+              <Text style={{ fontSize: 80 }}>🦩</Text>
             </LinearGradient>
           </View>
 

@@ -269,7 +269,7 @@ def print_summary(created, failed):
     print("="*60)
 
 def main():
-    print("🦊 ROMINGO A1 DERS OLUŞTURUCU")
+    print("🦩 ROMINGO A1 DERS OLUŞTURUCU")
     print("="*60)
     print(f"Toplam ders sayısı: {len(A1_CURRICULUM)}")
     print(f"Başlangıç zamanı: {datetime.now().strftime('%Y-%m-%d %H:%M:%S')}")
