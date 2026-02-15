@@ -50,6 +50,37 @@ stories_collection = db.stories
 # Security
 security = HTTPBearer()
 
+# Database indexes for performance optimization
+def create_database_indexes():
+    """Create indexes on frequently queried fields"""
+    # Users collection indexes
+    users_collection.create_index("email", unique=True)
+    users_collection.create_index("username")
+    users_collection.create_index("xp")
+    
+    # User progress collection indexes
+    user_progress_collection.create_index([("user_id", ASCENDING), ("lesson_id", ASCENDING)])
+    user_progress_collection.create_index([("user_id", ASCENDING), ("story_id", ASCENDING)])
+    user_progress_collection.create_index([("user_id", ASCENDING), ("completed", ASCENDING)])
+    
+    # League collections indexes
+    leagues_collection.create_index([("tier", ASCENDING), ("week", ASCENDING)])
+    league_members_collection.create_index("league_id")
+    league_members_collection.create_index([("user_id", ASCENDING), ("league_id", ASCENDING)])
+    
+    # Achievements and inventory indexes
+    achievements_collection.create_index("user_id")
+    user_inventory_collection.create_index("user_id")
+    
+    # Lessons collection indexes
+    lessons_collection.create_index("level")
+
+# Create indexes on startup
+@app.on_event("startup")
+async def startup_event():
+    """Initialize database indexes on application startup"""
+    create_database_indexes()
+
 # Pydantic Models
 class UserRegister(BaseModel):
     username: str = Field(..., min_length=3, max_length=30)
@@ -331,12 +362,20 @@ async def get_lessons(current_user: dict = Depends(get_current_user)):
     lessons = list(lessons_collection.find().sort("level", ASCENDING))
     user_id = str(current_user["_id"])
     
+    # Batch fetch all progress at once instead of N+1 queries
+    lesson_ids = [str(lesson["_id"]) for lesson in lessons]
+    progress_docs = user_progress_collection.find({
+        "user_id": user_id,
+        "lesson_id": {"$in": lesson_ids}
+    })
+    
+    # Create a lookup map for progress
+    progress_map = {p["lesson_id"]: p for p in progress_docs}
+    
     lessons_with_progress = []
     for lesson in lessons:
-        progress = user_progress_collection.find_one({
-            "user_id": user_id,
-            "lesson_id": str(lesson["_id"])
-        })
+        lesson_id = str(lesson["_id"])
+        progress = progress_map.get(lesson_id)
         
         lesson_data = serialize_doc(lesson)
         lesson_data["completed"] = progress.get("completed", False) if progress else False
@@ -758,17 +797,22 @@ async def get_skill_tree(current_user: dict = Depends(get_current_user)):
 async def get_friends(current_user: dict = Depends(get_current_user)):
     """Get user's friends list"""
     friend_ids = current_user.get("friends", [])
+    if not friend_ids:
+        return {"friends": []}
+    
+    # Batch fetch all friends at once instead of N+1 queries
+    friend_object_ids = [ObjectId(fid) for fid in friend_ids]
+    friend_docs = users_collection.find({"_id": {"$in": friend_object_ids}})
+    
     friends = []
-    for friend_id in friend_ids:
-        friend = users_collection.find_one({"_id": ObjectId(friend_id)})
-        if friend:
-            friends.append({
-                "id": str(friend["_id"]),
-                "username": friend["username"],
-                "xp": friend.get("xp", 0),
-                "streak": friend.get("streak", 0),
-                "level": friend.get("level", 1)
-            })
+    for friend in friend_docs:
+        friends.append({
+            "id": str(friend["_id"]),
+            "username": friend["username"],
+            "xp": friend.get("xp", 0),
+            "streak": friend.get("streak", 0),
+            "level": friend.get("level", 1)
+        })
     return {"friends": friends}
 
 @app.post("/api/friends/add/{username}")
@@ -818,12 +862,20 @@ async def get_stories(current_user: dict = Depends(get_current_user)):
     stories = list(stories_collection.find().sort("level", ASCENDING))
     user_id = str(current_user["_id"])
     
+    # Batch fetch all progress at once instead of N+1 queries
+    story_ids = [str(story["_id"]) for story in stories]
+    progress_docs = user_progress_collection.find({
+        "user_id": user_id,
+        "story_id": {"$in": story_ids}
+    })
+    
+    # Create a lookup map for progress
+    progress_map = {p["story_id"]: p for p in progress_docs}
+    
     stories_with_progress = []
     for story in stories:
-        progress = user_progress_collection.find_one({
-            "user_id": user_id,
-            "story_id": str(story["_id"])
-        })
+        story_id = str(story["_id"])
+        progress = progress_map.get(story_id)
         
         story_data = serialize_doc(story)
         story_data["completed"] = progress.get("completed", False) if progress else False

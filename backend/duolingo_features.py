@@ -207,12 +207,19 @@ async def get_league_standings(user_id: str):
     if not league_doc:
         return []
     
-    # Get all members and their weekly XP
+    # Get all members
     members = list(league_members_collection.find({"league_id": str(league_doc["_id"])}))
+    
+    # Batch fetch all users at once instead of N+1 queries
+    member_user_ids = [ObjectId(member["user_id"]) for member in members]
+    users_docs = users_collection.find({"_id": {"$in": member_user_ids}})
+    
+    # Create a lookup map for users
+    users_map = {str(user_doc["_id"]): user_doc for user_doc in users_docs}
     
     standings = []
     for member in members:
-        member_user = users_collection.find_one({"_id": ObjectId(member["user_id"])})
+        member_user = users_map.get(member["user_id"])
         if member_user:
             standings.append({
                 "user_id": member["user_id"],
@@ -265,33 +272,55 @@ async def get_skill_tree_lessons(user):
     all_lessons = list(lessons_collection.find().sort("level", 1))
     user_id = str(user["_id"])
     
+    # Pre-fetch all user progress at once
+    lesson_ids = [str(lesson["_id"]) for lesson in all_lessons]
+    progress_docs = user_progress_collection.find({
+        "user_id": user_id,
+        "lesson_id": {"$in": lesson_ids}
+    })
+    progress_map = {p["lesson_id"]: p for p in progress_docs}
+    
+    # Pre-compute completion counts per level
+    completed_progress = user_progress_collection.find({
+        "user_id": user_id,
+        "completed": True
+    })
+    completed_lesson_ids = {p["lesson_id"] for p in completed_progress}
+    
+    # Group lessons by level and count completions
+    lessons_by_level = {}
+    for lesson in all_lessons:
+        level = lesson.get("level", 1)
+        if level not in lessons_by_level:
+            lessons_by_level[level] = []
+        lessons_by_level[level].append(str(lesson["_id"]))
+    
+    # Count completed lessons per level
+    completed_per_level = {}
+    for level, lesson_ids_in_level in lessons_by_level.items():
+        completed_count = sum(1 for lid in lesson_ids_in_level if lid in completed_lesson_ids)
+        completed_per_level[level] = completed_count
+    
     tree = []
     for lesson in all_lessons:
         lesson_id = str(lesson["_id"])
+        level = lesson.get("level", 1)
         
-        # Check if lesson is unlocked (previous lessons completed)
+        # Check if lesson is unlocked (previous level lessons completed)
         is_unlocked = True
-        if lesson.get("level", 1) > 1:
-            # Check if previous level is completed
-            prev_level_lessons = lessons_collection.count_documents({"level": lesson["level"] - 1})
-            from server import user_progress_collection
-            completed_prev = user_progress_collection.count_documents({
-                "user_id": user_id,
-                "completed": True,
-                "lesson_id": {"$in": [str(l["_id"]) for l in lessons_collection.find({"level": lesson["level"] - 1})]}
-            })
-            is_unlocked = completed_prev >= prev_level_lessons
+        if level > 1:
+            prev_level = level - 1
+            total_prev_lessons = len(lessons_by_level.get(prev_level, []))
+            completed_prev = completed_per_level.get(prev_level, 0)
+            is_unlocked = completed_prev >= total_prev_lessons
         
-        # Get lesson progress
-        progress = user_progress_collection.find_one({
-            "user_id": user_id,
-            "lesson_id": lesson_id
-        })
+        # Get lesson progress from pre-fetched map
+        progress = progress_map.get(lesson_id)
         
         tree.append({
             "id": lesson_id,
             "title": lesson.get("title", ""),
-            "level": lesson.get("level", 1),
+            "level": level,
             "is_unlocked": is_unlocked,
             "is_completed": progress.get("completed", False) if progress else False,
             "stars": min(5, (progress.get("score", 0) // 20)) if progress else 0,  # 0-5 stars
