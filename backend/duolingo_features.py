@@ -95,7 +95,7 @@ async def initialize_shop():
             "description": "Bir dersi atlayarak bir sonraki derse geçin",
             "price": 450,
             "icon": "🚀",
-            "category": "permanent"
+            "category": "consumable"
         },
         {
             "item_type": "bonus_lesson",

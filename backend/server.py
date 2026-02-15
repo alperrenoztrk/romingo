@@ -703,31 +703,10 @@ async def purchase_item(item_id: str, current_user: dict = Depends(get_current_u
             "active_until": (datetime.utcnow() + timedelta(minutes=15)).isoformat(),
             "purchased_at": datetime.utcnow().isoformat()
         })
-    elif item["item_type"] == "hint_token":
+    elif item["item_type"] in ("hint_token", "mistake_shield", "level_skip", "bonus_lesson"):
         user_inventory_collection.insert_one({
             "user_id": str(current_user["_id"]),
-            "item_type": "hint_token",
-            "quantity": 1,
-            "purchased_at": datetime.utcnow().isoformat()
-        })
-    elif item["item_type"] == "mistake_shield":
-        user_inventory_collection.insert_one({
-            "user_id": str(current_user["_id"]),
-            "item_type": "mistake_shield",
-            "quantity": 1,
-            "purchased_at": datetime.utcnow().isoformat()
-        })
-    elif item["item_type"] == "level_skip":
-        user_inventory_collection.insert_one({
-            "user_id": str(current_user["_id"]),
-            "item_type": "level_skip",
-            "quantity": 1,
-            "purchased_at": datetime.utcnow().isoformat()
-        })
-    elif item["item_type"] == "bonus_lesson":
-        user_inventory_collection.insert_one({
-            "user_id": str(current_user["_id"]),
-            "item_type": "bonus_lesson",
+            "item_type": item["item_type"],
             "quantity": 1,
             "purchased_at": datetime.utcnow().isoformat()
         })
