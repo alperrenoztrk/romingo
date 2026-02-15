@@ -24,11 +24,22 @@ interface PracticeLesson {
   exercises_count: number;
 }
 
+interface DueReview {
+  lesson_id: string;
+  exercise_index: number;
+  question: string;
+  error_type: string;
+  exercise_type: string;
+  mistake_count: number;
+  next_review_at: string;
+}
+
 export default function Practice() {
   const { user } = useAuth();
   const [mistakes, setMistakes] = useState<PracticeLesson[]>([]);
-  const [loading, setLoading] = useState(true);
   const [startingPractice, setStartingPractice] = useState(false);
+  const [dueReviews, setDueReviews] = useState<DueReview[]>([]);
+  const [reviewQueueStats, setReviewQueueStats] = useState<{due_now: number; total_tracked: number}>({ due_now: 0, total_tracked: 0 });
   const router = useRouter();
 
   useEffect(() => {
@@ -37,12 +48,12 @@ export default function Practice() {
 
   const loadMistakes = async () => {
     try {
-      const data = await api.getPracticeMistakes();
+      const [data, queue] = await Promise.all([api.getPracticeMistakes(), api.getReviewQueue()]);
       setMistakes(data.practice_lessons || []);
+      setDueReviews(data.due_reviews || []);
+      setReviewQueueStats({ due_now: queue.due_now || 0, total_tracked: queue.total_tracked || 0 });
     } catch (error) {
       console.error('Failed to load practice mistakes:', error);
-    } finally {
-      setLoading(false);
     }
   };
 
@@ -60,7 +71,7 @@ export default function Practice() {
       // Navigate to practice session (would need a new screen)
       Alert.alert(
         'Pratik Başlıyor!',
-        `${session.total} soru ile pratik yapmaya başlıyorsun!`,
+        `${session.total} soru ile pratik yapmaya başlıyorsun! (${session.srs_due_count || 0} soru SRS tekrar kuyruğundan)`,
         [
           { text: 'Tamam', onPress: () => {
             // TODO: Navigate to practice session screen
@@ -106,6 +117,30 @@ export default function Practice() {
               Yanlış yaptığın soruları tekrar ederek öğrenmeyi pekiştir
             </Text>
           </LinearGradient>
+        </View>
+
+        <View style={styles.section}>
+          <Text style={styles.sectionTitle}>🧠 Yanlışlarım & SRS Takvimi</Text>
+          <View style={styles.srsSummary}>
+            <Text style={styles.srsSummaryText}>Bugün tekrar: {reviewQueueStats.due_now}</Text>
+            <Text style={styles.srsSummarySubtext}>Takip edilen toplam yanlış: {reviewQueueStats.total_tracked}</Text>
+          </View>
+
+          {dueReviews.length > 0 ? (
+            <View style={styles.srsList}>
+              {dueReviews.slice(0, 5).map((item, index) => (
+                <View key={`${item.lesson_id}-${item.exercise_index}-${index}`} style={styles.srsCard}>
+                  <View style={styles.srsTag}>
+                    <Text style={styles.srsTagText}>{item.error_type}</Text>
+                  </View>
+                  <Text style={styles.srsQuestion} numberOfLines={2}>{item.question}</Text>
+                  <Text style={styles.srsMeta}>Yanlış sayısı: {item.mistake_count} • Plan: 1g → 3g → 7g</Text>
+                </View>
+              ))}
+            </View>
+          ) : (
+            <Text style={styles.srsEmpty}>Bugün planlı tekrarın yok. Süper gidiyorsun! ✨</Text>
+          )}
         </View>
 
         <View style={styles.section}>
@@ -292,6 +327,56 @@ const styles = StyleSheet.create({
     color: Colors.textSecondary,
     marginTop: 8,
     textAlign: 'center',
+  },
+  srsSummary: {
+    backgroundColor: '#EEF7FF',
+    borderRadius: 12,
+    padding: 14,
+    marginBottom: 12,
+  },
+  srsSummaryText: {
+    fontSize: 16,
+    fontWeight: '700',
+    color: Colors.text,
+  },
+  srsSummarySubtext: {
+    marginTop: 4,
+    fontSize: 13,
+    color: Colors.textSecondary,
+  },
+  srsList: {
+    gap: 10,
+  },
+  srsCard: {
+    backgroundColor: 'white',
+    borderRadius: 12,
+    padding: 12,
+  },
+  srsTag: {
+    alignSelf: 'flex-start',
+    backgroundColor: '#FFE7D0',
+    borderRadius: 999,
+    paddingHorizontal: 8,
+    paddingVertical: 4,
+    marginBottom: 8,
+  },
+  srsTagText: {
+    color: '#B35B00',
+    fontWeight: '700',
+    fontSize: 12,
+  },
+  srsQuestion: {
+    color: Colors.text,
+    fontWeight: '600',
+  },
+  srsMeta: {
+    marginTop: 6,
+    color: Colors.textSecondary,
+    fontSize: 12,
+  },
+  srsEmpty: {
+    color: Colors.textSecondary,
+    fontSize: 14,
   },
   actionSection: {
     marginTop: 8,

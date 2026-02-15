@@ -9,6 +9,7 @@ from bson import ObjectId
 import os
 import jwt
 import bcrypt
+import difflib
 from dotenv import load_dotenv
 import asyncio
 from emergentintegrations.llm.chat import LlmChat, UserMessage
@@ -46,6 +47,7 @@ friends_collection = db.friends
 leagues_collection = db.leagues
 league_members_collection = db.league_members
 stories_collection = db.stories
+mistakes_collection = db.user_mistakes
 
 # Security
 security = HTTPBearer()
@@ -121,6 +123,95 @@ def serialize_doc(doc):
     doc["id"] = str(doc["_id"])
     del doc["_id"]
     return doc
+
+def normalize_text(text: str) -> str:
+    return " ".join((text or "").lower().strip().split())
+
+def get_text_similarity(user_answer: str, correct_answer: str) -> float:
+    return difflib.SequenceMatcher(None, normalize_text(user_answer), normalize_text(correct_answer)).ratio()
+
+def detect_error_type(exercise: dict) -> str:
+    exercise_type = exercise.get("type")
+    if exercise_type in ["speaking", "listening"]:
+        return f"{exercise_type}_accuracy"
+    if exercise_type in ["translation", "sentence_complete"]:
+        return "grammar"
+    if exercise_type in ["word_match", "multiple_choice"]:
+        return "vocabulary"
+    return "general"
+
+def spaced_repetition_days(repetition_count: int) -> int:
+    schedule = [1, 3, 7, 14, 30]
+    return schedule[min(repetition_count, len(schedule) - 1)]
+
+def update_mistake_bank(user_id: str, lesson_id: str, exercise_index: int, exercise: dict, user_answer: str, is_correct: bool):
+    now = datetime.utcnow()
+    key = {
+        "user_id": user_id,
+        "lesson_id": lesson_id,
+        "exercise_index": exercise_index,
+    }
+
+    existing = mistakes_collection.find_one(key)
+    error_type = detect_error_type(exercise)
+
+    if is_correct:
+        if not existing:
+            return
+
+        next_repetition = existing.get("repetition_count", 0) + 1
+        next_days = spaced_repetition_days(next_repetition)
+        mistakes_collection.update_one(
+            {"_id": existing["_id"]},
+            {
+                "$set": {
+                    "last_answer": user_answer,
+                    "last_result": "correct",
+                    "last_seen_at": now.isoformat(),
+                    "repetition_count": next_repetition,
+                    "next_review_at": (now + timedelta(days=next_days)).isoformat(),
+                    "status": "scheduled",
+                }
+            }
+        )
+        return
+
+    if existing:
+        mistakes_collection.update_one(
+            {"_id": existing["_id"]},
+            {
+                "$set": {
+                    "exercise_type": exercise.get("type"),
+                    "error_type": error_type,
+                    "question": exercise.get("question"),
+                    "correct_answer": exercise.get("correct_answer"),
+                    "last_answer": user_answer,
+                    "last_result": "wrong",
+                    "last_seen_at": now.isoformat(),
+                    "next_review_at": (now + timedelta(days=1)).isoformat(),
+                    "status": "due",
+                },
+                "$inc": {
+                    "mistake_count": 1
+                }
+            }
+        )
+    else:
+        mistakes_collection.insert_one({
+            **key,
+            "exercise_type": exercise.get("type"),
+            "error_type": error_type,
+            "question": exercise.get("question"),
+            "correct_answer": exercise.get("correct_answer"),
+            "last_answer": user_answer,
+            "last_result": "wrong",
+            "mistake_count": 1,
+            "repetition_count": 0,
+            "next_review_at": (now + timedelta(days=1)).isoformat(),
+            "status": "due",
+            "created_at": now.isoformat(),
+            "last_seen_at": now.isoformat(),
+        })
 
 # AI Helper - Generate lessons using LLM
 async def generate_lesson_content(level: int, topic: str):
@@ -415,15 +506,23 @@ async def submit_exercise(submission: ExerciseSubmit, current_user: dict = Depen
         raise HTTPException(status_code=400, detail="Invalid exercise index")
     
     exercise = exercises[submission.exercise_index]
-    correct_answer = exercise.get("correct_answer", "").lower().strip()
-    user_answer = submission.user_answer.lower().strip()
+    correct_answer = normalize_text(exercise.get("correct_answer", ""))
+    user_answer = normalize_text(submission.user_answer)
     
     # Check if answer is correct
     is_correct = False
+    similarity_score = get_text_similarity(user_answer, correct_answer)
+    feedback_details = {}
     if exercise.get("type") == "translation":
         # Check acceptable answers for translation
-        acceptable = [correct_answer] + [ans.lower().strip() for ans in exercise.get("acceptable_answers", [])]
+        acceptable = [correct_answer] + [normalize_text(ans) for ans in exercise.get("acceptable_answers", [])]
         is_correct = user_answer in acceptable
+        feedback_details["similarity"] = round(similarity_score * 100)
+    elif exercise.get("type") in ["speaking", "listening"]:
+        pronunciation_score = int(similarity_score * 100)
+        is_correct = similarity_score >= 0.78
+        feedback_details["pronunciation_score"] = pronunciation_score
+        feedback_details["evaluation"] = "good" if pronunciation_score >= 90 else "okay" if pronunciation_score >= 78 else "needs_practice"
     else:
         is_correct = user_answer == correct_answer
     
@@ -435,12 +534,22 @@ async def submit_exercise(submission: ExerciseSubmit, current_user: dict = Depen
             {"_id": current_user["_id"]},
             {"$inc": {"xp": xp_earned}}
         )
+
+    update_mistake_bank(
+        user_id=user_id,
+        lesson_id=submission.lesson_id,
+        exercise_index=submission.exercise_index,
+        exercise=exercise,
+        user_answer=user_answer,
+        is_correct=is_correct,
+    )
     
     return {
         "correct": is_correct,
         "correct_answer": exercise.get("correct_answer"),
         "explanation": exercise.get("explanation", ""),
-        "xp_earned": xp_earned
+        "xp_earned": xp_earned,
+        "feedback_details": feedback_details,
     }
 
 @app.post("/api/lessons/{lesson_id}/complete")
@@ -966,14 +1075,46 @@ async def get_practice_mistakes(current_user: dict = Depends(get_current_user)):
         except:
             continue
     
-    return {"practice_lessons": practice_lessons}
+    now_iso = datetime.utcnow().isoformat()
+    due_reviews = list(mistakes_collection.find({
+        "user_id": user_id,
+        "next_review_at": {"$lte": now_iso}
+    }).sort("next_review_at", ASCENDING).limit(30))
+
+    return {
+        "practice_lessons": practice_lessons,
+        "due_reviews": [
+            {
+                "lesson_id": item.get("lesson_id"),
+                "exercise_index": item.get("exercise_index"),
+                "question": item.get("question"),
+                "error_type": item.get("error_type"),
+                "exercise_type": item.get("exercise_type"),
+                "mistake_count": item.get("mistake_count", 0),
+                "next_review_at": item.get("next_review_at"),
+            }
+            for item in due_reviews
+        ],
+    }
 
 @app.post("/api/practice/session")
 async def create_practice_session(current_user: dict = Depends(get_current_user)):
     """Create a practice session with mixed questions"""
     user_id = str(current_user["_id"])
     
-    # Get weak areas
+    # 1) Prioritize SRS queue items due now
+    now_iso = datetime.utcnow().isoformat()
+    due_reviews = list(mistakes_collection.find({
+        "user_id": user_id,
+        "next_review_at": {"$lte": now_iso}
+    }).sort("next_review_at", ASCENDING).limit(10))
+
+    adaptive_type_boost = {}
+    for item in due_reviews:
+        error_type = item.get("error_type", "general")
+        adaptive_type_boost[error_type] = adaptive_type_boost.get(error_type, 0) + 1
+
+    # 2) Get weak areas
     poor_progress = list(user_progress_collection.find({
         "user_id": user_id,
         "score": {"$lt": 80}
@@ -986,7 +1127,17 @@ async def create_practice_session(current_user: dict = Depends(get_current_user)
             lesson = lessons_collection.find_one({"_id": ObjectId(lesson_id)})
             if lesson:
                 exercises = lesson.get("exercises", [])
-                for ex in exercises[:2]:  # Take 2 exercises per weak lesson
+                preferred_types = sorted(adaptive_type_boost.items(), key=lambda x: x[1], reverse=True)
+
+                if preferred_types:
+                    ranked_exercises = sorted(
+                        exercises,
+                        key=lambda ex: 0 if detect_error_type(ex) == preferred_types[0][0] else 1
+                    )
+                else:
+                    ranked_exercises = exercises
+
+                for ex in ranked_exercises[:2]:  # Take 2 exercises per weak lesson
                     ex["lesson_id"] = lesson_id
                     ex["lesson_title"] = lesson.get("title")
                     all_exercises.append(ex)
@@ -997,9 +1148,61 @@ async def create_practice_session(current_user: dict = Depends(get_current_user)
     import random
     random.shuffle(all_exercises)
     
+    due_review_exercises = []
+    for review in due_reviews:
+        try:
+            lesson = lessons_collection.find_one({"_id": ObjectId(review.get("lesson_id"))})
+            if not lesson:
+                continue
+            exercises = lesson.get("exercises", [])
+            ex_index = review.get("exercise_index", 0)
+            if ex_index >= len(exercises):
+                continue
+            ex = exercises[ex_index]
+            ex["lesson_id"] = review.get("lesson_id")
+            ex["lesson_title"] = lesson.get("title")
+            ex["review_reason"] = review.get("error_type")
+            due_review_exercises.append(ex)
+        except:
+            continue
+
+    mixed = (due_review_exercises + all_exercises)[:10]
+
     return {
-        "exercises": all_exercises[:10],  # Max 10 questions
-        "total": len(all_exercises[:10])
+        "exercises": mixed,
+        "total": len(mixed),
+        "adaptive_focus": adaptive_type_boost,
+        "srs_due_count": len(due_review_exercises),
+    }
+
+@app.get("/api/practice/review-queue")
+async def get_review_queue(current_user: dict = Depends(get_current_user)):
+    """SRS tekrar kuyruğunu getirir (1g/3g/7g/14g/30g)."""
+    user_id = str(current_user["_id"])
+    now_iso = datetime.utcnow().isoformat()
+    queue = list(mistakes_collection.find({
+        "user_id": user_id
+    }).sort("next_review_at", ASCENDING).limit(50))
+
+    due = [item for item in queue if item.get("next_review_at", now_iso) <= now_iso]
+
+    return {
+        "due_now": len(due),
+        "total_tracked": len(queue),
+        "queue": [
+            {
+                "lesson_id": item.get("lesson_id"),
+                "exercise_index": item.get("exercise_index"),
+                "question": item.get("question"),
+                "error_type": item.get("error_type"),
+                "exercise_type": item.get("exercise_type"),
+                "mistake_count": item.get("mistake_count", 0),
+                "repetition_count": item.get("repetition_count", 0),
+                "next_review_at": item.get("next_review_at"),
+                "status": "due" if item.get("next_review_at", now_iso) <= now_iso else "scheduled",
+            }
+            for item in queue
+        ]
     }
 
 
@@ -1030,4 +1233,3 @@ async def update_preferences(
         )
     
     return {"message": "Preferences updated", "updated": update_data}
-

@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import {
   View,
   Text,
@@ -8,6 +8,8 @@ import {
   TextInput,
   Alert,
   ActivityIndicator,
+  Animated,
+  Easing,
 } from 'react-native';
 import { SafeAreaView } from 'react-native-safe-area-context';
 import { useRouter, useLocalSearchParams } from 'expo-router';
@@ -54,8 +56,11 @@ export default function LessonDetail() {
   const [selectedOption, setSelectedOption] = useState<string | null>(null);
   const [matchedPairs, setMatchedPairs] = useState<{[key: string]: string}>({});
   const [selectedForMatch, setSelectedForMatch] = useState<{side: 'left' | 'right', value: string} | null>(null);
-  const [feedback, setFeedback] = useState<{correct: boolean, message: string} | null>(null);
+  const [feedback, setFeedback] = useState<{correct: boolean, message: string, details?: any} | null>(null);
   const [correctAnswers, setCorrectAnswers] = useState(0);
+  const [comboStreak, setComboStreak] = useState(0);
+  const [bestCombo, setBestCombo] = useState(0);
+  const feedbackAnim = useRef(new Animated.Value(0)).current;
   const [showVocabulary, setShowVocabulary] = useState(true);
   const [showCompletion, setShowCompletion] = useState(false);
   const [completionData, setCompletionData] = useState<any>(null);
@@ -90,6 +95,16 @@ export default function LessonDetail() {
     } catch (error) {
       console.warn('Speech not available:', error);
     }
+  };
+
+  const animateFeedback = () => {
+    feedbackAnim.setValue(0);
+    Animated.timing(feedbackAnim, {
+      toValue: 1,
+      duration: 280,
+      easing: Easing.out(Easing.ease),
+      useNativeDriver: true,
+    }).start();
   };
 
   const handleSubmitAnswer = async () => {
@@ -128,13 +143,22 @@ export default function LessonDetail() {
 
       setFeedback({
         correct: result.correct,
+        details: result.feedback_details || {},
         message: result.correct
           ? '✅ Doğru cevap!'
           : `❌ Yanlış. Doğru cevap: ${result.correct_answer}\n${result.explanation || ''}`,
       });
+      animateFeedback();
 
       if (result.correct) {
         setCorrectAnswers(prev => prev + 1);
+        setComboStreak(prev => {
+          const next = prev + 1;
+          setBestCombo(best => Math.max(best, next));
+          return next;
+        });
+      } else {
+        setComboStreak(0);
       }
 
       setTimeout(() => {
@@ -182,6 +206,7 @@ export default function LessonDetail() {
         accuracyBonus,
         didLevelUp,
         newLevel: didLevelUp ? newUser.level : undefined,
+        bestCombo,
       });
       setShowCompletion(true);
     } catch (error) {
@@ -407,6 +432,8 @@ export default function LessonDetail() {
           setShowVocabulary(false);
           setCurrentExerciseIndex(0);
           setCorrectAnswers(0);
+          setComboStreak(0);
+          setBestCombo(0);
           setFeedback(null);
         }}
       />
@@ -477,9 +504,12 @@ export default function LessonDetail() {
         <View style={styles.progressContainer}>
           <ProgressBar progress={progress} />
         </View>
-        <Text style={styles.exerciseCount}>
-          {currentExerciseIndex + 1}/{lesson.exercises.length}
-        </Text>
+        <View style={styles.headerRight}>
+          <Text style={styles.exerciseCount}>
+            {currentExerciseIndex + 1}/{lesson.exercises.length}
+          </Text>
+          <Text style={styles.progressText}>%{Math.round(progress * 100)}</Text>
+        </View>
       </View>
 
       <ScrollView style={styles.scrollView} contentContainerStyle={styles.scrollContent}>
@@ -489,13 +519,34 @@ export default function LessonDetail() {
           </View>
         )}
 
+        {!feedback && comboStreak >= 2 && (
+          <View style={styles.comboBadge}>
+            <MaterialCommunityIcons name="fire" size={18} color="#FF8C00" />
+            <Text style={styles.comboText}>{comboStreak} cevaplık seri!</Text>
+          </View>
+        )}
+
         {currentExercise && renderExercise(currentExercise)}
 
         {feedback && (
-          <View style={[styles.feedbackContainer, feedback.correct ? styles.correctFeedback : styles.incorrectFeedback]}>
+          <Animated.View
+            style={[
+              styles.feedbackContainer,
+              feedback.correct ? styles.correctFeedback : styles.incorrectFeedback,
+              {
+                opacity: feedbackAnim,
+                transform: [{
+                  translateY: feedbackAnim.interpolate({ inputRange: [0, 1], outputRange: [12, 0] })
+                }],
+              },
+            ]}
+          >
             <FoxMascot expression={feedback.correct ? 'excited' : 'sad'} size={60} />
             <Text style={styles.feedbackText}>{feedback.message}</Text>
-          </View>
+            {feedback.details?.pronunciation_score !== undefined && (
+              <Text style={styles.scoreText}>Telaffuz skoru: {feedback.details.pronunciation_score}/100</Text>
+            )}
+          </Animated.View>
         )}
 
         {!feedback && (
@@ -564,10 +615,19 @@ const styles = StyleSheet.create({
     flex: 1,
     marginHorizontal: 16,
   },
+  headerRight: {
+    alignItems: 'flex-end',
+  },
   exerciseCount: {
     fontSize: 14,
     fontWeight: '600',
     color: '#666',
+  },
+  progressText: {
+    fontSize: 12,
+    color: '#58CC02',
+    marginTop: 2,
+    fontWeight: '700',
   },
   scrollView: {
     flex: 1,
@@ -582,6 +642,22 @@ const styles = StyleSheet.create({
   foxContainer: {
     alignItems: 'center',
     marginBottom: 24,
+  },
+  comboBadge: {
+    alignSelf: 'center',
+    flexDirection: 'row',
+    alignItems: 'center',
+    backgroundColor: '#FFF4E6',
+    borderRadius: 999,
+    paddingVertical: 8,
+    paddingHorizontal: 14,
+    marginBottom: 16,
+    gap: 6,
+  },
+  comboText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#FF8C00',
   },
   vocabSection: {
     marginBottom: 24,
@@ -746,6 +822,12 @@ const styles = StyleSheet.create({
     textAlign: 'center',
     marginTop: 12,
     lineHeight: 24,
+  },
+  scoreText: {
+    fontSize: 14,
+    fontWeight: '700',
+    color: '#1CB0F6',
+    marginTop: 8,
   },
   submitContainer: {
     marginTop: 24,
