@@ -236,7 +236,7 @@ export default function Learn() {
 
       <View style={styles.footer}>
         <Button
-          title="Yeni Ders Ekle (AI)"
+          title="Yeni Ders Ekle"
           onPress={generateNewLesson}
           loading={generating}
           variant="success"
