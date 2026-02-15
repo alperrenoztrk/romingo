@@ -12,7 +12,6 @@ import { SafeAreaView } from 'react-native-safe-area-context';
 import { LinearGradient } from 'expo-linear-gradient';
 import { useRouter } from 'expo-router';
 import { api } from '../../utils/api';
-import { Button } from '../../components/Button';
 import { UserStatsHeader } from '../../components/UserStatsHeader';
 import { MaterialCommunityIcons } from '@expo/vector-icons';
 import { Colors } from '../../constants/Colors';
@@ -33,7 +32,6 @@ export default function Learn() {
   const [tree, setTree] = useState<SkillTreeLesson[]>([]);
   const [loading, setLoading] = useState(true);
   const [refreshing, setRefreshing] = useState(false);
-  const [generating, setGenerating] = useState(false);
   const router = useRouter();
 
   useEffect(() => {
@@ -70,34 +68,6 @@ export default function Learn() {
     setRefreshing(true);
     await loadSkillTree();
     setRefreshing(false);
-  };
-
-  const generateNewLesson = async () => {
-    setGenerating(true);
-    try {
-      const nextLevel = tree.length + 1;
-      const topics = [
-        'Merhaba ve Selamlaşma',
-        'Sayılar ve Renkler',
-        'Aile ve Arkadaşlar',
-        'Yemek ve İçecek',
-        'Alışveriş',
-        'Seyahat',
-        'Ev ve Mobilya',
-        'Hava Durumu',
-        'Günlük Rutinler',
-        'Hobiler',
-      ];
-      const topic = topics[tree.length % topics.length];
-
-      await api.generateLesson(nextLevel, topic);
-      Alert.alert('Başarılı!', 'Yeni ders oluşturuldu!');
-      await loadSkillTree();
-    } catch (error: any) {
-      Alert.alert('Hata', error.message || 'Ders oluşturulamadı');
-    } finally {
-      setGenerating(false);
-    }
   };
 
   const handleLessonPress = (lesson: SkillTreeLesson) => {
@@ -225,7 +195,7 @@ export default function Learn() {
           <View style={styles.emptyState}>
             <MaterialCommunityIcons name="tree" size={80} color={Colors.textLight} />
             <Text style={styles.emptyText}>Henüz ders yok</Text>
-            <Text style={styles.emptySubtext}>İlk dersi oluşturmak için butona bas</Text>
+            <Text style={styles.emptySubtext}>Dersler yakında burada görünecek</Text>
           </View>
         ) : (
           <View style={styles.tree}>
@@ -233,16 +203,6 @@ export default function Learn() {
           </View>
         )}
       </ScrollView>
-
-      <View style={styles.footer}>
-        <Button
-          title="Yeni Ders Ekle"
-          onPress={generateNewLesson}
-          loading={generating}
-          variant="success"
-          fullWidth
-        />
-      </View>
     </SafeAreaView>
   );
 }
@@ -363,12 +323,6 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 18,
     fontWeight: 'bold',
-  },
-  footer: {
-    padding: 16,
-    backgroundColor: 'white',
-    borderTopWidth: 1,
-    borderTopColor: Colors.gray200,
   },
   emptyState: {
     alignItems: 'center',
